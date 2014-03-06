@@ -1,0 +1,10 @@
+db:
+  server:   "localhost" # server address
+  user:      "username" # user name
+  password:      "****" # password
+  name:    "necorandum" # name of the db
+system:
+  blowfish_salt: "$2a$07$ujCGoM5ZdNk156y8xsrUIF$" # Blowfish salt
+  token_expires: 10   # days tokens expires
+  articles_per_page: 8
+  articles_per_feed: 20
