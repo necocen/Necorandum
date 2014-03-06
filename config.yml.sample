@@ -8,3 +8,9 @@ system:
   token_expires: 10   # days tokens expires
   articles_per_page: 8
   articles_per_feed: 20
+site:
+  title: "nekonekko"
+  description: "個人的な技術めもです。"
+  email: "necocen@gmail.com"
+  author: "κねこせん"
+  ga_code: "UA-AAAAAAAA-A"
