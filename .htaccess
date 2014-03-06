@@ -1,0 +1,37 @@
+# このファイルに使われている文字コードがUTF-8Nであることは確定的に明らか
+
+<Files ~ "^config\.yml.*$">
+       deny from all
+</Files>
+<Files ~ "^.*\.inc\.php$">
+       deny from all
+</Files>
+
+# turn off magic_quotes
+php_flag magic_quotes_gpc Off
+php_flag magic_quotes_runtime Off
+php_flag magic_quotes_sybase Off
+
+# 消してリライトして
+RewriteEngine On
+
+# リダイレクトする子たち
+# RewriteRule	^admin/login$		?admin=1&mode=login			[L]
+# RewriteRule	^admin/create$	?admin=1&mode=create		[L]
+# RewriteRule	^admin/update$	?admin=1&mode=update		[L]
+# RewriteRule	^admin/logout$	?admin=1&mode=logout		[L]
+
+# 管理画面
+# RewriteRule	^admin/?$				?admin=1								[L]
+# RewriteRule	^admin/new$			?admin=1&mode=new				[L]
+# RewriteRule	^admin/edit$		?admin=1&mode=edit			[QSA] # idはクエリで指定
+# RewriteRule	^admin/config$	?admin=1&mode=config		[L]
+
+# そのほかのページ
+# RewriteRule	^atom$					?mode=feed&type=atom		[QSA] # page
+# RewriteRule	^rss2$					?mode=feed&type=rss2		[QSA] # page
+
+# 記事
+RewriteRule	^([1-9][0-9]*)$	?id=$1									[L]
+RewriteRule ^tags/([1-9][0-9]*)& ?tag=$1						[QSA] # page
+
