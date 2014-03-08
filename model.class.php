@@ -166,7 +166,7 @@ abstract class Model
 			}
 			
 			// ステートメントに値をバインド
-			$statement_params = $types;
+			$statement_params[] = implode("", $types);
 			for($i = 0; $i < count($params); $i++)
 			{
 				$statement_params[] = &$params[$i];
@@ -271,7 +271,7 @@ abstract class Model
 		if($statement === FALSE) return FALSE; // プリペアド・ステートメントがうまくできなかった
 		
 		// ステートメントに値をバインド
-		$statement_params = $types;
+		$statement_params[] = implode("", $types);
 		for($i = 0; $i < count($params); $i++)
 		{
 			$statement_params[] = &$params[$i];
@@ -279,7 +279,7 @@ abstract class Model
 		call_user_func_array(array($statement, 'bind_param'), $statement_params);
 
 		// ステートメント実行
-		if($statement->exexute() !== TRUE) return FALSE;
+		if($statement->execute() !== TRUE) return FALSE;
 
 		// idの附番
 		if($this->is_new)
