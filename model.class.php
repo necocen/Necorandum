@@ -27,7 +27,7 @@ abstract class Model
 	function __construct()
 	{
 		$argc = func_num_args();
-		if($argc == 1 && is_array(func_get_arg(0)))
+		if($argc === 1 && is_array(func_get_arg(0)))
 		{
 			$values = func_get_arg(0);
 			if (array_key_exists("id", $values))
@@ -175,7 +175,7 @@ abstract class Model
 		}
 		
 		// ステートメント実行
-		if(!$statement->exexute()) return;
+		if(!$statement->execute()) return;
 
 		// 結果に値をバインド
 		$meta = $statement->result_metadata();
