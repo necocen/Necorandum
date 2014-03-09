@@ -1,0 +1,114 @@
+@charset "utf-8";
+
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+html {height: 100%;}
+
+body
+{
+	font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+	height: 100%;
+}
+
+div#container
+{
+	height: auto;
+	min-height: 100%;
+	position: relative;
+}
+
+hr {display: none;}
+
+a, a:visited
+{
+	text-decoration: none;
+	color: inherit;
+}
+a:hover {color: #666;}
+
+ul.tags:before {content: "Tags: ";}
+
+ul.tags li {display: inline-block;}
+ul.tags li:before {content: " / ";}
+ul.tags li:first-child:before {content: "";}
+
+div#title
+{
+	width: 800px;
+	height: 210px;
+	margin: 0 auto;
+}
+
+div#menu
+{
+	height: 120px;
+	color: white;
+	background-color: black;
+}
+
+div#menu ul.tags
+{
+	width: 400px;
+	padding: 0 0 0 400px;
+	margin: 0 auto;
+}
+
+div#main
+{
+	width: 800px;
+	min-height: 100%;
+	padding: 0 0 50px 0;
+	margin: 0 auto;
+}
+
+div#foot
+{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50px;
+	color: white;
+	background-color: black;
+}
+
+div.article
+{
+	margin: 4ex 0;
+}
+
+div.article h2
+{
+
+	font-weight: bold;
+}
+
+div.article p
+{
+	margin: 2ex 0;
+	font-size: small;
+	line-height: 170%;
+	text-align: justify;
+	text-justify: inter-ideograph;
+}
+div.article ul.tags, div.timestamps
+{
+	font-size: small;
+}
+
+div.timestamps
+{
+	float: left;
+}
+
+div.article ul.tags
+{
+	text-align:right;
+}
+
+div.article ul.tags:after {clear:both;}
+
+div.article h2, ul.tags, div.timestamps {font-family: Georgia, "Hiragino Mincho ProN W3", "Yu Mincho", "MS Mincho", serif;}
