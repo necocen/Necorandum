@@ -49,4 +49,15 @@ function finalize()
 	$GLOBALS["mysql"]->close();
 }
 
+function base_url()
+{
+	return $GLOBALS["system"]["base"];
+}
+
+// HTML special chars
+function h($text)
+{
+	return htmlspecialchars($text, ENT_QUOTES, "UTF-8");
+}
+
 ?>

@@ -2,6 +2,8 @@
 
 require_once "config.inc.php";
 require_once "common.inc.php";
+require_once "view.inc.php";
+require_once "article.class.php";
 
 if(!init_necorandum())
 {
@@ -12,8 +14,16 @@ if(!init_necorandum())
 // 圧縮バッファ
 ob_start("ob_gzhandler");
 
+/*
+$article = new Article();
+$article->title = "test";
+$article->text = "文字列";
+$article->created_at = new DateTime();
+$article->updated_at = new DateTime();
+$article->save();
+	*/
 
-print "neko";
+print layout("head", "contents", "foot");
 
 $mime_type = NULL;
 

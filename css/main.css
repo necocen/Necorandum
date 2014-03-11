@@ -41,6 +41,9 @@ div#title
 	width: 800px;
 	height: 210px;
 	margin: 0 auto;
+	background-image: url("./title.png");
+	background-repeat: no-repeat;
+	background-position: 200px 30px;
 }
 
 div#menu
@@ -53,8 +56,12 @@ div#menu
 div#menu ul.tags
 {
 	width: 400px;
+	height: 120px;
 	padding: 0 0 0 400px;
 	margin: 0 auto;
+	background-image: url("./title.png");
+	background-repeat: no-repeat;
+	background-position: 200px -180px;
 }
 
 div#main
