@@ -43,7 +43,7 @@ div#title
 	margin: 0 auto;
 	background-image: url("./title.png");
 	background-repeat: no-repeat;
-	background-position: 200px 30px;
+	background-position: 205px 30px;
 }
 
 div#menu
@@ -61,7 +61,7 @@ div#menu ul.tags
 	margin: 0 auto;
 	background-image: url("./title.png");
 	background-repeat: no-repeat;
-	background-position: 200px -180px;
+	background-position: 205px -180px;
 }
 
 div#main
