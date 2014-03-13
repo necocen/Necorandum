@@ -41,7 +41,7 @@ div#title
 	width: 800px;
 	height: 210px;
 	margin: 0 auto;
-	background-image: url("./title.png");
+	background-image: url("./title.svg");
 	background-repeat: no-repeat;
 	background-position: 205px 30px;
 }
@@ -59,7 +59,7 @@ div#menu ul.tags
 	height: 120px;
 	padding: 0 0 0 400px;
 	margin: 0 auto;
-	background-image: url("./title.png");
+	background-image: url("./title.svg");
 	background-repeat: no-repeat;
 	background-position: 205px -180px;
 }
