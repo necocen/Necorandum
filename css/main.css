@@ -6,19 +6,24 @@
 	padding: 0;
 }
 
-html {height: 100%;}
+html
+{
+	height: 100%;
+}
 
 body
 {
-	font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 	height: 100%;
+	font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
 
 div#container
 {
+	width: 100%;
 	height: auto;
 	min-height: 100%;
 	position: relative;
+	margin: 0 auto;
 }
 
 hr {display: none;}
@@ -38,12 +43,13 @@ ul.tags li:first-child:before {content: "";}
 
 div#title
 {
-	width: 800px;
+	width: 100%;
+	max-width: 800px;
 	height: 210px;
 	margin: 0 auto;
 	background-image: url("./title.svgz");
 	background-repeat: no-repeat;
-	background-position: 205px 30px;
+	background-position: 51% 30px;
 }
 
 div#menu
@@ -55,18 +61,20 @@ div#menu
 
 div#menu ul.tags
 {
-	width: 400px;
+	width: 100%;
+	max-width: 800px;
 	height: 120px;
-	padding: 0 0 0 400px;
 	margin: 0 auto;
 	background-image: url("./title.svgz");
 	background-repeat: no-repeat;
-	background-position: 205px -180px;
+	background-position: 51% -180px;
+	text-align: right;
 }
 
 div#main
 {
-	width: 800px;
+	max-width: 800px;
+	width: 100%;
 	min-height: 100%;
 	padding: 0 0 50px 0;
 	margin: 0 auto;
