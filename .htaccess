@@ -9,6 +9,9 @@
 <Files ~ "^.*\.class\.php$">
        deny from all
 </Files>
+<Files ~ "^composer.*$">
+       deny from all
+</Files>
 
 # turn off magic_quotes
 php_flag magic_quotes_gpc Off

@@ -1,9 +1,0 @@
-<div class="article">
-	<h2>{{article.title|e}}</h2>
-	<div class="timestamps">
-		<span class="posted-at">2014-03-16 18:54:10</span>
-	</div>
-	<ul class="tags">
-	</ul>
-	{{article.text|parsedown|raw}}
-</div>

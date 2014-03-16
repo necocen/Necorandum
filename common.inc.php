@@ -10,8 +10,10 @@ function init_necorandum()
 	// authenticate
 //	$GLOBALS["system"]["authenticated"] = FALSE;
 
+	/*
 	$GLOBALS["parsedown"] = new Parsedown();
 	$GLOBALS["parsedown"]->setBreaksEnabled(TRUE);
+		*/
 	
 	// データベース設定
 	$GLOBALS["mysql"] = mysqli_init();
