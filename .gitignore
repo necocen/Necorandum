@@ -4,3 +4,4 @@ Thumbs.db
 composer.phar
 /vendor
 neko
+cache
