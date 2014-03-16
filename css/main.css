@@ -35,6 +35,12 @@ a, a:visited
 }
 a:hover {color: #666;}
 
+pre
+{
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
 ul.tags:before {content: "Tags: ";}
 
 ul.tags li {display: inline-block;}
@@ -43,10 +49,13 @@ ul.tags li:first-child:before {content: "";}
 
 div#title
 {
+	position: relative;
+	z-index: 10;
 	width: 100%;
 	max-width: 800px;
 	height: 210px;
-	margin: 0 auto;
+	margin: 0 auto -120px;
+	padding: 0 0 120px 0;
 	background-image: url("./title.svgz");
 	background-repeat: no-repeat;
 	background-position: 51% 30px;
@@ -61,14 +70,13 @@ div#menu
 
 div#menu ul.tags
 {
-	width: 100%;
-	max-width: 800px;
+	position: relative;
+	z-index: 12;
+	width: 50%;
+	max-width: 400px;
 	height: 120px;
+	padding: 0 0 0 400px; /* TODO: もうちょっとちゃんと*/
 	margin: 0 auto;
-	background-image: url("./title.svgz");
-	background-repeat: no-repeat;
-	background-position: 51% -180px;
-	text-align: right;
 }
 
 div#main

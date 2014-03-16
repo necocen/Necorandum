@@ -1,0 +1,7 @@
+<div id="title">
+	<h1>{{title|e}}</h1>
+</div>
+<div id="menu">
+	<ul class="tags">
+	</ul>
+</div>

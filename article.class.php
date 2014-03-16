@@ -12,16 +12,16 @@ class Article extends Model
 
 	// 指定されたページの記事を配列で返します。
 	// ページが指定されない(NULL)場合は全部返します。
-	public static function articles($page = NULL)
+	public static function all($page = NULL)
 	{
-		return self::articles_with_tag(NULL, $page);
+		return self::find_by_tag(NULL, $page);
 	}
 
 	// 指定されたタグの記事のうち、指定されたページのものを配列で返します。
 	// タグが指定されない(NULL)場合は全部のタグを対象とします。
 	// ページが指定されない(NULL)場合は全件返します。
 	// ページは1-based.
-	public static function articles_with_tag($tag = NULL, $page = NULL)
+	public static function find_by_tag($tag = NULL, $page = NULL)
 	{
 		$limit = [];
 		$where = NULL;

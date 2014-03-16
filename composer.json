@@ -1,5 +1,6 @@
 {
 	"require": {
-		"erusev/parsedown": "dev-master"
+		"erusev/parsedown": "dev-master",
+		"twig/twig":"1.*"
 	}
 }

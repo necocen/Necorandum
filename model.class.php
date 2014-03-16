@@ -73,6 +73,13 @@ abstract class Model
 		}
 	}
 
+	public function __isset($name)
+	{
+		if(!$this->is_new && $name === "id") return TRUE;
+		else if(array_key_exists($name, $this->data)) return TRUE;
+		else return FALSE;
+	}
+
 	// IDを指定してオブジェクトを探して返します
 	// 存在しない場合はNULLを返します
 	public static function find($id)
@@ -129,7 +136,7 @@ abstract class Model
 		$statement = $GLOBALS["mysql"]->prepare("SELECT * FROM `" . static::table_name() . "`$where$order_by$limit");
 		if($statement === FALSE) return []; // プリペアド・ステートメントがうまくできなかった
 
-		if(is_array($array["where"]) && count($array["where"]) > 1)
+		if(strlen($where) > 0 && is_array($array["where"]) && count($array["where"]) > 1)
 		{
 			// 値の設定と型の指定
 			$params = [];
