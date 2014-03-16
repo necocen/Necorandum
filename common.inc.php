@@ -10,10 +10,38 @@ function init_necorandum()
 	// authenticate
 //	$GLOBALS["system"]["authenticated"] = FALSE;
 
-	/*
-	$GLOBALS["parsedown"] = new Parsedown();
-	$GLOBALS["parsedown"]->setBreaksEnabled(TRUE);
-		*/
+
+	// twig
+	$twig_loader = new MtHaml\Support\Twig\Loader(new MtHaml\Environment("twig", ["enable_escaper" => FALSE, "format" => "xhtml"]),
+																								new Twig_Loader_Filesystem("./templates"));
+	$twig = new Twig_Environment($twig_loader, ['cache' => FALSE]);
+	$twig->addExtension(new MtHaml\Support\Twig\Extension());
+	
+	$parsedown = new Parsedown();
+	$parsedown->setBreaksEnabled(TRUE);
+	
+	// parsedown+α フィルタ
+	$parsedown_filter = new Twig_SimpleFilter("parsedown", function ($string) use($parsedown) {
+		// parsedown
+		$string = $parsedown->parse($string);
+		
+		// 見出しレベルの調整
+		$string = str_replace("<h3>", "<h5>", $string);
+		$string = str_replace("</h3>", "</h5>", $string);
+		$string = str_replace("<h2>", "<h4>", $string);
+		$string = str_replace("</h2>", "</h4>", $string);
+		$string = str_replace("<h1>", "<h3>", $string);
+		$string = str_replace("</h1>", "</h3>", $string);
+		
+		// XHTMLではpreタグの先頭改行が表示されてしまうので消す
+		$string = str_replace("\n</pre>", "</pre>", str_replace("<pre>\n", "<pre>", $string));
+		
+		return $string;
+	});
+	
+	$twig->addFilter($parsedown_filter);
+	$GLOBALS["twig"] = $twig;
+	
 	
 	// データベース設定
 	$GLOBALS["mysql"] = mysqli_init();
@@ -54,10 +82,6 @@ function finalize()
 	$GLOBALS["mysql"]->close();
 }
 
-function base_url()
-{
-	return $GLOBALS["system"]["base"];
-}
 
 // HTML special chars
 function h($text)
