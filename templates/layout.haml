@@ -4,19 +4,20 @@
 %html(xmlns = "http://www.w3.org/1999/xhtml" xml:lang = "ja" lang = "ja")
 	%head
 		%meta(name = "ROBOTS" content = "INDEX, FOLLOW")/
-		%meta(name = "generator" content = "Necorandum #{version}")/
-		%meta(name = "description" content = "#{description}")/
-		%meta(name = "author" contetn = "#{author}")/
-		%meta(name = "reply-to" content = "#{email}")/
+		%meta(name = "generator" content = "Necorandum #{system.version}")/
+		%meta(name = "description" content = "#{config.site.description}")/
+		%meta(name = "author" contetn = "#{config.site.author}")/
+		%meta(name = "reply-to" content = "#{config.site.email}")/
+		%base(href = "http://#{system.base}/")/
 		%link(rel = "stylesheet" href = "./css/main.css" type = "text/css" media = "screen")/
 		%script(type = "text/javascript" src = "http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js")
 		%script(type = "text/javascript" src = "./main.js")
-		- include "ga.haml" with {code: ga_code}
-		%title = title
+		- include "ga.haml" with {code: config.site.ga_code}
+		%title = config.site.title
 	%body
 		%div#container
 			%div#head
-				- include "head.haml"
+				- include "head.haml" with {title: config.site.title}
 			%hr
 			%div#main
 				%div
@@ -26,4 +27,4 @@
 							%hr/
 			%hr
 			%div#foot
-				- include "foot.haml"
+				- include "foot.haml" with {author: config.site.author}

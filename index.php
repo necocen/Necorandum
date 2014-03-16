@@ -16,10 +16,8 @@ ob_start("ob_gzhandler");
 
 // twig
 $layout_variables = [
-	"base" => $GLOBALS["system"]["base"],
-	"ga_code" => $GLOBALS["config"]["site"]["ga_code"],
-	"title" => $GLOBALS["config"]["site"]["title"],
-	"author" => $GLOBALS["config"]["site"]["author"],
+	"config" => $GLOBALS["config"],
+	"system" => $GLOBALS["system"],
 	"articles" => Article::all()
 	];
 
