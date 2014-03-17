@@ -21,10 +21,7 @@
 			%hr
 			%div#main
 				%div
-					- for article in articles
-						- include "article.haml" with {article: article}
-						- if not loop.last
-							%hr/
+					- include "articles.haml" with {articles: articles}
 			%hr
 			%div#foot
 				- include "foot.haml" with {author: config.site.author}

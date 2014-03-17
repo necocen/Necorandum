@@ -40,6 +40,8 @@ function init_necorandum()
 	});
 	
 	$twig->addFilter($parsedown_filter);
+
+	$twig->getExtension("core")->setDateFormat("Y-m-d H:i:s", "%d days");
 	$GLOBALS["twig"] = $twig;
 	
 	
