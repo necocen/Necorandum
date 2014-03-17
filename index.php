@@ -21,7 +21,7 @@ $layout_variables = [
 	"articles" => Article::all()
 	];
 
-print $GLOBALS["twig"]->render("articles.twig", $layout_variables);
+print $GLOBALS["twig"]->render("layout.twig", $layout_variables);
 
 $mime_type = NULL;
 
