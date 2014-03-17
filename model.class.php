@@ -41,12 +41,11 @@ abstract class Model
 		$overall_fields = static::$fields + ["id" => "int"];
 		foreach($overall_fields as $field => $type)
 		{
-			if(!is_null($values) && array_key_exists($field, $values) && self::has_appropriate_type($values[$field], $type))
-				$this->data[$field] = $values[$field];
+			if(!is_null($values) && array_key_exists($field, $values))
+				$this->data[$field] = self::to_appropriate_type($values[$field], $type);
 			else
 				$this->data[$field] = self::default_for_type($type);
 		}
-		
 	}
 
 	// プロパティ
