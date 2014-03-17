@@ -1,7 +1,0 @@
-{% haml %}
-%div.article
-	%h2=article.title|e
-	%div.timestamps
-		%span.posted-at #{article.created_at|date}
-	%ul.tags
-	#{article.text|parsedown|raw}

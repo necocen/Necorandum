@@ -1,7 +1,6 @@
 {
 	"require": {
 		"erusev/parsedown": "dev-master",
-		"twig/twig":"1.*",
-		"mthaml/mthaml": "dev-master"
+		"twig/twig":"1.*"
 	}
 }

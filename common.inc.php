@@ -12,10 +12,8 @@ function init_necorandum()
 
 
 	// twig
-	$twig_loader = new MtHaml\Support\Twig\Loader(new MtHaml\Environment("twig", ["enable_escaper" => FALSE, "format" => "xhtml"]),
-																								new Twig_Loader_Filesystem("./templates"));
+	$twig_loader = new Twig_Loader_Filesystem("./templates");
 	$twig = new Twig_Environment($twig_loader, ['cache' => FALSE]);
-	$twig->addExtension(new MtHaml\Support\Twig\Extension());
 	
 	$parsedown = new Parsedown();
 	$parsedown->setBreaksEnabled(TRUE);

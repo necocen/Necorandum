@@ -1,6 +1,0 @@
-{% haml %}
-%div
-	- for article in articles
-		- include "article.haml" with {article: article}
-		- if not loop.last
-			%hr/
