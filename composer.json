@@ -1,6 +1,7 @@
 {
 	"require": {
 		"erusev/parsedown": "dev-master",
-		"twig/twig":"1.*"
+		"twig/twig":"1.*",
+		"php-activerecord/php-activerecord": "dev-master"
 	}
 }

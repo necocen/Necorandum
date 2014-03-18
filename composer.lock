@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4b157c59fd64aeed2568ff0e96c32ed1",
+    "hash": "d19c7c8cb1ccae4ba98161f48a4b8028",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -43,6 +43,45 @@
                 "parser"
             ],
             "time": "2014-02-28 12:05:10"
+        },
+        {
+            "name": "php-activerecord/php-activerecord",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jpfuentes2/php-activerecord.git",
+                "reference": "6ca994b9f8cf984cff14033ad96264d17916af56"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jpfuentes2/php-activerecord/zipball/6ca994b9f8cf984cff14033ad96264d17916af56",
+                "reference": "6ca994b9f8cf984cff14033ad96264d17916af56",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "pear/log": "dev-master",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "ActiveRecord.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "php-activerecord is an open source ORM library based on the ActiveRecord pattern.",
+            "homepage": "http://www.phpactiverecord.org/",
+            "keywords": [
+                "activerecord",
+                "orm"
+            ],
+            "time": "2014-02-27 17:26:01"
         },
         {
             "name": "twig/twig",
@@ -110,7 +149,8 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "erusev/parsedown": 20
+        "erusev/parsedown": 20,
+        "php-activerecord/php-activerecord": 20
     },
     "platform": [
 

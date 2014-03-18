@@ -10,6 +10,21 @@ function init_necorandum()
 	// authenticate
 //	$GLOBALS["system"]["authenticated"] = FALSE;
 
+	// active record
+	$mysql_address = "mysql://" .
+		$GLOBALS["config"]["db"]["user"] . ":" .
+			$GLOBALS["config"]["db"]["password"] . "@" .
+				$GLOBALS["config"]["db"]["server"] . "/" .
+					$GLOBALS["config"]["db"]["name"] . "?charset=utf8";
+
+	ActiveRecord\Config::initialize(
+		function($cfg) use ($mysql_address)
+		{
+			$cfg->set_model_directory("./models");
+			$cfg->set_connections(["production" => $mysql_address]);
+			$cfg->set_default_connection("production");
+		});
+	
 
 	// twig
 	$twig_loader = new Twig_Loader_Filesystem("./templates");
@@ -42,16 +57,6 @@ function init_necorandum()
 	$twig->getExtension("core")->setDateFormat("Y-m-d H:i:s", "%d days");
 	$GLOBALS["twig"] = $twig;
 	
-	
-	// データベース設定
-	$GLOBALS["mysql"] = mysqli_init();
-
-	// 接続
-	if(!$GLOBALS["mysql"]->real_connect($GLOBALS["config"]["db"]["server"],
-																			$GLOBALS["config"]["db"]["user"],
-																			$GLOBALS["config"]["db"]["password"],
-																			$GLOBALS["config"]["db"]["name"])) return FALSE;
-	$GLOBALS["mysql"]->set_charset("utf8");
 
 	// 初回起動ですか？
 //	$GLOBALS["system"]["first"] = !has_config_table();
@@ -79,7 +84,6 @@ function init_necorandum()
 
 function finalize()
 {
-	$GLOBALS["mysql"]->close();
 }
 
 
