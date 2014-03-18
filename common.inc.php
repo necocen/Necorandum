@@ -47,7 +47,7 @@ function init_necorandum()
 	$parsedown_filter = new Twig_SimpleFilter("markdown", function ($string) use($parser, $use_parsedown) {
 
 		// parsedown
-		if ($use_parsedown)
+		if($use_parsedown)
 		{
 			$string = $parser->parse($string);
 		}
@@ -65,7 +65,10 @@ function init_necorandum()
 		$string = str_replace("</h1>", "</h3>", $string);
 		
 		// XHTMLではpreタグの先頭改行が表示されてしまうので消す(Parsedownのみ)
-		$string = str_replace("\n</pre>", "</pre>", str_replace("<pre>\n", "<pre>", $string));
+		if($use_parsedown)
+		{
+			$string = str_replace("\n</pre>", "</pre>", str_replace("<pre>\n", "<pre>", $string));
+		}
 		
 		return $string;
 	});
