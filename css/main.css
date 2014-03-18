@@ -134,4 +134,5 @@ div.article ul.tags
 
 div.article ul.tags:after {clear:both;}
 
-div.article h2, ul.tags, div.timestamps {font-family: Georgia, "Hiragino Mincho ProN W3", "Yu Mincho", "MS Mincho", serif;}
+h1, h2, h3, h4, h5, h6 {font-family: "Hiragino Mincho ProN W3", "Yu Mincho", Meiryo;}
+ul.tags, div.timestamps {font-family: Georgia, "Hiragino Mincho ProN W3", "Yu Mincho", Meiryo, serif;}

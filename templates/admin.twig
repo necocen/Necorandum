@@ -1,0 +1,30 @@
+{% extends "layout.twig" %}
+
+{% block title %}admin - {{ parent() }}{% endblock %}
+
+{% block contents %}
+<div class="config article">
+	<h2>admin</h2>
+	<form action="./admin/create" method="POST">
+		<h3><label for="article-title">タイトル</label></h3>
+		<p>
+			記事のタイトルです。
+		</p>
+		<p>
+			<input type="text" name="article-title" id="article-title" value="" size="50" />
+		</p>
+		<h3><label for="article-text">本文</label></h3>
+		<p>
+			記事の本文です。
+		</p>
+		<p>
+			<textarea name="article-text" id="article-text" rows="20" cols="50"></textarea>
+		</p>
+		<h4>投稿</h4>
+		<p>
+			<input type="submit" value="送信" /><input type="reset" value="消去" />
+			<input type="hidden" name="token" id="token" value="5327327f3bc067.45266318" />
+		</p>
+	</form>
+</div>
+{% endblock %}
