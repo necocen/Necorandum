@@ -22,16 +22,16 @@ php_flag magic_quotes_sybase Off
 RewriteEngine On
 
 # リダイレクトする子たち
-# RewriteRule	^admin/login$		?admin=1&mode=login			[L]
-# RewriteRule	^admin/create$	?admin=1&mode=create		[L]
-# RewriteRule	^admin/update$	?admin=1&mode=update		[L]
-# RewriteRule	^admin/logout$	?admin=1&mode=logout		[L]
+RewriteRule	^admin/login$		?admin=1&mode=login			[L]
+RewriteRule	^admin/create$	?admin=1&mode=create		[L]
+RewriteRule	^admin/update$	?admin=1&mode=update		[L]
+RewriteRule	^admin/logout$	?admin=1&mode=logout		[L]
 
 # 管理画面
-# RewriteRule	^admin/?$				?admin=1								[L]
-# RewriteRule	^admin/new$			?admin=1&mode=new				[L]
-# RewriteRule	^admin/edit$		?admin=1&mode=edit			[QSA] # idはクエリで指定
-# RewriteRule	^admin/config$	?admin=1&mode=config		[L]
+RewriteRule	^admin/?$				?admin=1								[L]
+RewriteRule	^admin/new$			?admin=1&mode=new				[L]
+RewriteRule	^admin/edit$		?admin=1&mode=edit			[QSA] # idはクエリで指定
+RewriteRule	^admin/config$	?admin=1&mode=config		[L]
 
 # そのほかのページ
 # RewriteRule	^atom$					?mode=feed&type=atom		[QSA] # page

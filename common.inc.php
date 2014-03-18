@@ -10,6 +10,8 @@ function init_necorandum()
 	// authenticate
 //	$GLOBALS["system"]["authenticated"] = FALSE;
 
+	$use_parsedown = TRUE;
+
 	// active record
 	$mysql_address = "mysql://" .
 		$GLOBALS["config"]["db"]["user"] . ":" .
@@ -29,14 +31,30 @@ function init_necorandum()
 	// twig
 	$twig_loader = new Twig_Loader_Filesystem("./templates");
 	$twig = new Twig_Environment($twig_loader, ['cache' => FALSE]);
+
+	// Parsedown or PHP Markdown+Extra
+	if($use_parsedown)
+	{
+		$parser = new Parsedown();
+		$parser->setBreaksEnabled(TRUE);
+	}
+	else
+	{
+		$parser = new Michelf\MarkdownExtra;
+	}
 	
-	$parsedown = new Parsedown();
-	$parsedown->setBreaksEnabled(TRUE);
-	
-	// parsedown+α フィルタ
-	$parsedown_filter = new Twig_SimpleFilter("parsedown", function ($string) use($parsedown) {
+	// markdown+α フィルタ
+	$parsedown_filter = new Twig_SimpleFilter("markdown", function ($string) use($parser, $use_parsedown) {
+
 		// parsedown
-		$string = $parsedown->parse($string);
+		if ($use_parsedown)
+		{
+			$string = $parser->parse($string);
+		}
+		else
+		{
+			$string = $parser->transform($string);
+		}
 		
 		// 見出しレベルの調整
 		$string = str_replace("<h3>", "<h5>", $string);
@@ -46,7 +64,7 @@ function init_necorandum()
 		$string = str_replace("<h1>", "<h3>", $string);
 		$string = str_replace("</h1>", "</h3>", $string);
 		
-		// XHTMLではpreタグの先頭改行が表示されてしまうので消す
+		// XHTMLではpreタグの先頭改行が表示されてしまうので消す(Parsedownのみ)
 		$string = str_replace("\n</pre>", "</pre>", str_replace("<pre>\n", "<pre>", $string));
 		
 		return $string;

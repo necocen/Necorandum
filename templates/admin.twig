@@ -13,6 +13,13 @@
 		<p>
 			<input type="text" name="article-title" id="article-title" value="" size="50" />
 		</p>
+		<h3><label for="article-tags">タグ</label></h3>
+		<p>
+			記事のタグです。（半角コンマ区切り、先頭末尾の空白は無視）
+		</p>
+		<p>
+			<input type="text" name="article-tags" id="article-tags" value="" size="50" />
+		</p>
 		<h3><label for="article-text">本文</label></h3>
 		<p>
 			記事の本文です。
@@ -23,7 +30,7 @@
 		<h4>投稿</h4>
 		<p>
 			<input type="submit" value="送信" /><input type="reset" value="消去" />
-			<input type="hidden" name="token" id="token" value="5327327f3bc067.45266318" />
+			<input type="hidden" name="token" id="token" value="{{token}}" />
 		</p>
 	</form>
 </div>
