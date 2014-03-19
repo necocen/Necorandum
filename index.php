@@ -3,6 +3,7 @@
 require_once "vendor/autoload.php"; // for composer, twig
 require_once "config.inc.php";
 require_once "common.inc.php";
+require_once "controller.inc.php";
 
 if(!init_necorandum())
 {
@@ -17,35 +18,62 @@ if(array_key_exists("admin", $_GET)) $admin = (intval($_GET["admin"]) === 1);
 if(array_key_exists("mode", $_GET)) $mode = strtolower($_GET["mode"]);
 
 $redirect_to = NULL;
+$error = NULL;
+$info = [];
+$warn = [];
+$mime_type = NULL;
 
 if($admin)
 {
 	if($mode === "create")
 	{
-		$article = new Article();
-		$article->title = strval($_POST["article-title"]);
-		$article->text = strval($_POST["article-text"]);
-		$article->save();
-		$redirect_to = "/";
+		if(create_article($_POST))
+		{
+			$redirect_to = "/";
+			$info += ["記事を投稿しました"];
+		}
+		else
+		{
+			$redirect_to = "/admin/new";
+			$warn += ["記事の投稿に失敗しました"];
+		}
 	}
 	else if($mode === "update")
 	{
+		if(update_article($_POST))
+		{
+			$redirect_to = "/";
+			$info += ["記事を更新しました"];
+		}
+		else
+		{
+			$redirect_to = "/admin/edit/"; // TODO: ID
+			$warn += ["記事の更新に失敗しました"];
+		}
+	}
+	else if($mode === "logout")
+	{
+		// TODO: ログアウト
 	}
 	else
 	{
+//		$error = 404; // Not Found
 	}
 }
+
 
 // リダイレクト
 if(is_string($redirect_to) && strlen($redirect_to) > 0)
 {
+	// TODO: info, warn
 	header("Location: " . $redirect_to);
 	die("Redirect");
 }
 
 // 圧縮バッファ
-//ob_start("ob_gzhandler");
-ob_start();
+ob_start("ob_gzhandler");
+
+
 // twig
 $layout_variables = [
 	"config" => $GLOBALS["config"],
@@ -55,7 +83,11 @@ $layout_variables = [
 
 $template = "layout.twig";
 
-if($admin)
+if(!is_null($error)) // エラー？
+{
+	// 404ページ？
+}
+else if($admin) // 管理ページ？
 {
 	$layout_variables += ["admin" => TRUE, "embed_ga" => FALSE];
 	$template = "admin.twig";
@@ -67,9 +99,6 @@ else
 
 
 print $GLOBALS["twig"]->render($template, $layout_variables);
-
-
-$mime_type = NULL;
 
 // MIMEタイプヘッダ出力
 if(is_null($mime_type)) $mime_type = "application/xhtml+xml";

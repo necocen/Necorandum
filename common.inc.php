@@ -28,9 +28,10 @@ function init_necorandum()
 		});
 	
 
-	// twig
+	// twig(debug)
 	$twig_loader = new Twig_Loader_Filesystem("./templates");
-	$twig = new Twig_Environment($twig_loader, ['cache' => FALSE]);
+	$twig = new Twig_Environment($twig_loader, ["cache" => FALSE, "debug" => TRUE]);
+	$twig->addExtension(new Twig_Extension_Debug());
 
 	// Parsedown or PHP Markdown+Extra
 	if($use_parsedown)

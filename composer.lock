@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "7ef45894a7264ba5946d34caa61e7f0d83ed9dc0"
+                "reference": "24d872383c9f06d6610ca071f1c455ed603fa619"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/7ef45894a7264ba5946d34caa61e7f0d83ed9dc0",
-                "reference": "7ef45894a7264ba5946d34caa61e7f0d83ed9dc0",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/24d872383c9f06d6610ca071f1c455ed603fa619",
+                "reference": "24d872383c9f06d6610ca071f1c455ed603fa619",
                 "shasum": ""
             },
             "type": "library",
@@ -42,7 +42,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2014-02-28 12:05:10"
+            "time": "2014-03-18 22:58:26"
         },
         {
             "name": "php-activerecord/php-activerecord",
