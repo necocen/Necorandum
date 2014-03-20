@@ -2,7 +2,12 @@
 	"require": {
 		"erusev/parsedown": "dev-master",
 		"twig/twig":"1.*",
-		"php-activerecord/php-activerecord": "dev-master",
-		"symfony/yaml": "2.4.*@dev"
+		"symfony/yaml": "2.4.*@dev",
+		"laravelbook/ardent": "dev-master"
+	},
+	"autoload": {
+		"classmap": [
+			"models"
+		]	
 	}
 }

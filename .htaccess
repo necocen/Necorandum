@@ -39,5 +39,5 @@ RewriteRule	^admin/config$	?admin=1&mode=config		[L]
 
 # 記事
 RewriteRule	^([1-9][0-9]*)$	?id=$1									[L]
-RewriteRule ^tags/([1-9][0-9]*)& ?tag=$1						[QSA] # page
+RewriteRule ^tags/([1-9][0-9]*)$ ?tagid=$1						[QSA] # page
 

@@ -12,21 +12,16 @@ function init_necorandum()
 
 	$use_parsedown = TRUE;
 
-	// active record
-	$mysql_address = "mysql://" .
-		$GLOBALS["config"]["db"]["user"] . ":" .
-			$GLOBALS["config"]["db"]["password"] . "@" .
-				$GLOBALS["config"]["db"]["server"] . "/" .
-					$GLOBALS["config"]["db"]["name"] . "?charset=utf8";
-
-	ActiveRecord\Config::initialize(
-		function($cfg) use ($mysql_address)
-		{
-			$cfg->set_model_directory("./models");
-			$cfg->set_connections(["production" => $mysql_address]);
-			$cfg->set_default_connection("production");
-		});
-	
+	// Ardent
+	\LaravelBook\Ardent\Ardent::configureAsExternal([
+		"driver"    => "mysql",
+		"host"      => $GLOBALS["config"]["db"]["server"],
+		"port"      => 3306,
+		"database"  => $GLOBALS["config"]["db"]["name"],
+		"username"  => $GLOBALS["config"]["db"]["user"],
+		"password"  => $GLOBALS["config"]["db"]["password"],
+		"charset"   => "utf8",
+		"collation" => "utf8_unicode_ci"]);
 
 	// twig(debug)
 	$twig_loader = new Twig_Loader_Filesystem("./templates");

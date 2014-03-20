@@ -1,9 +1,15 @@
 <?php
 
-class Tag extends ActiveRecord\Model
+class Tag extends \LaravelBook\Ardent\Ardent
 {
-	static $has_many = [["article_tag_relations", "class_name" => "ArticleTagRelation"],
-											["articles", "through" => "article_tag_relations", "order" => "created_at desc"]];
+	public static $relationsData = [
+		"articles" => [self::BELONGS_TO_MANY, "Article", "table" => "article_tag_relations"]
+		];
+
+	public static $rules = [
+		"name" => "required|min:1"
+		];
+
 }
 
 ?>
