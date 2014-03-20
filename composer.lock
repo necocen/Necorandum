@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d19c7c8cb1ccae4ba98161f48a4b8028",
+    "hash": "903ea3f650af93b2c8f25875bcd86701",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -84,6 +84,55 @@
             "time": "2014-02-27 17:26:01"
         },
         {
+            "name": "symfony/yaml",
+            "version": "2.4.x-dev",
+            "target-dir": "Symfony/Component/Yaml",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Yaml.git",
+                "reference": "77a41c2835ab7cfe8bf6d15e25d3af8f3eb3bacd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/77a41c2835ab7cfe8bf6d15e25d3af8f3eb3bacd",
+                "reference": "77a41c2835ab7cfe8bf6d15e25d3af8f3eb3bacd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Yaml\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-03-12 18:29:58"
+        },
+        {
             "name": "twig/twig",
             "version": "v1.15.1",
             "source": {
@@ -150,7 +199,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "erusev/parsedown": 20,
-        "php-activerecord/php-activerecord": 20
+        "php-activerecord/php-activerecord": 20,
+        "symfony/yaml": 20
     },
     "platform": [
 
