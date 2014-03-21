@@ -53,12 +53,12 @@ function init_necorandum()
 		}
 		
 		// 見出しレベルの調整
-		$string = str_replace("<h3>", "<h5>", $string);
-		$string = str_replace("</h3>", "</h5>", $string);
-		$string = str_replace("<h2>", "<h4>", $string);
-		$string = str_replace("</h2>", "</h4>", $string);
-		$string = str_replace("<h1>", "<h3>", $string);
-		$string = str_replace("</h1>", "</h3>", $string);
+		$string = str_replace("<h3>", "<h4>", $string);
+		$string = str_replace("</h3>", "</h4>", $string);
+		$string = str_replace("<h2>", "<h3>", $string);
+		$string = str_replace("</h2>", "</h3>", $string);
+		$string = str_replace("<h1>", "<h2>", $string);
+		$string = str_replace("</h1>", "</h2>", $string);
 		
 		// XHTMLではpreタグの先頭改行が表示されてしまうので消す(Parsedownのみ)
 		if($use_parsedown)

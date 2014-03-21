@@ -151,7 +151,7 @@ else
 print $GLOBALS["twig"]->render($template, $layout_variables);
 
 // MIMEタイプヘッダ出力
-if(is_null($mime_type)) $mime_type = "application/xhtml+xml";
+if(is_null($mime_type)) $mime_type = "text/html";
 header(sprintf("Content-Type: %s; charset=utf-8", $mime_type));
 
 finalize();

@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<!DOCTYPE html>
+<html lang="ja">
 	<head>
-		<meta name="ROBOTS" content="INDEX, FOLLOW" />
-		<meta name="generator" content="Necorandum {{system.version}}" />
-		<meta name="description" content="{{config.site.description}}" />
-		<meta name="author" content="{{config.site.author}}" />
-		<meta name="reply-to" content="{{config.site.email}}" />
-		<base href="http://{{system.base}}/" />
-		<link rel="stylesheet" href="./css/main.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/{{config.site.highlight_theme}}.min.css" media="screen" />
+		<meta charset="UTF-8">
+		<meta name="ROBOTS" content="INDEX, FOLLOW">
+		<meta name="generator" content="Necorandum {{system.version}}">
+		<meta name="description" content="{{config.site.description}}">
+		<meta name="author" content="{{config.site.author}}">
+		<meta name="reply-to" content="{{config.site.email}}">
+		<base href="http://{{system.base}}/">
+		<link rel="stylesheet" href="./css/main.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/{{config.site.highlight_theme}}.min.css" media="screen">
 		<script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
 		<script>
 //<![CDATA[
@@ -36,7 +36,7 @@
 	</head>
 	<body>
 		<div id="container">
-			<div id="head">
+			<header>
 				<div id="title">
 					<h1>{{config.site.title|e}}</h1>
 				</div>
@@ -44,24 +44,26 @@
 					<ul class="tags">
 				</ul>
 				</div>
-			</div>
-			<hr />
+			</header>
+			<hr>
 			<div id="main">
 				{% block contents %}
 				<div>
 					{% for article in articles %}
 						{% include "article.twig" with {article: article} %}
 						{% if not loop.last %}
-					<hr/>
+					<hr>
 						{% endif %}
 					{% endfor %}
 				</div>
 				{% endblock %}
 			</div>
-			<hr />
-			<div id="foot">
-				<address>presented by {{config.site.author|e}} under CC0.</address>
-			</div>
+			<hr>
+			<footer>
+				<div>
+					<address>presented by {{config.site.author|e}} under CC0.</address>
+				</div>
+			</footer>
 		</div>
 	</body>
 </html>

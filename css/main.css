@@ -6,10 +6,7 @@
 	padding: 0;
 }
 
-html
-{
-	height: 100%;
-}
+html {height: 100%;}
 
 body
 {
@@ -79,61 +76,104 @@ div#menu ul.tags
 	margin: 0 auto;
 }
 
+div#title h1 {display: none;}
+
 div#main
 {
 	max-width: 800px;
 	width: 100%;
 	min-height: 100%;
-	padding: 0 0 50px 0;
+	padding: 0 0 100px 0;
 	margin: 0 auto;
 }
 
-div#foot
+footer
 {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	height: 50px;
+	height: 100px;
 	color: white;
 	background-color: black;
 }
 
-div.article
+footer > div
 {
-	margin: 4ex 0;
+	width: 800px;
+	margin: auto;
+}
+
+address
+{
+	text-align: right;
+	font-style: normal;
+}
+
+article
+{
+	margin: 8ex 0;
 	font-size: small;
 }
 
-div.article h2
+article > p, article > ul, article > ol
 {
-
-	font-weight: bold;
+	line-height: 170%;
 }
 
-div.article p
+article h1 {font-weight: bold;}
+
+article h1, article h2, article h3, article h4, article h5, article h6
+{
+	margin: 1ex 0;
+}
+
+article h1
+{
+	margin: 0;
+	font-size: 30pt;
+	line-height: 40px;
+}
+
+article p, article blockquote
 {
 	margin: 2ex 0;
-	line-height: 170%;
 	text-align: justify;
 	text-justify: inter-ideograph;
 }
-div.article ul.tags, div.timestamps
+
+article blockquote
 {
-	font-size: small;
+	padding: 0 calc(2em - 4px);
+	margin-left: 1px;
+	border-left: 3px solid #ccc;
 }
 
-div.timestamps
+article code.hljs
 {
-	float: left;
+	line-height: 110%;
+	padding: 1em;
+	margin: 2ex 0.5em;
+	border-radius: 1em;
 }
 
-div.article ul.tags
+article ul, article ol
 {
-	text-align:right;
+	padding: 0 0 0 2em;
 }
 
-div.article ul.tags:after {clear:both;}
+article > ul, article > ol
+{
+	margin: 2ex 0;
+}
 
-h1, h2, h3, h4, h5, h6 {font-family: "Hiragino Mincho ProN W3", "Yu Mincho", Meiryo;}
-ul.tags, div.timestamps {font-family: Georgia, "Hiragino Mincho ProN W3", "Yu Mincho", Meiryo, serif;}
+aside.tags, aside.timestamps {font-size: small;}
+
+aside.timestamps {float: left;}
+
+aside.tags {text-align:right;}
+
+aside.tags:after {clear:both;}
+
+h1, h2, h3, h4, h5, h6 {font-family: "Hiragino Mincho ProN W3", YuMincho, '游明朝', Meiryo;}
+aside.tags, aside.timestamps, address {font-family: Georgia, "Hiragino Mincho ProN W3", YuMincho, '游明朝', Meiryo, serif;}
 code {font-family: Ricty, Consolas, Monaco, "Courier New", monospace;}

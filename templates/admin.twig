@@ -3,38 +3,38 @@
 {% block title %}admin - {{ parent() }}{% endblock %}
 
 {% block contents %}
-<div class="config article">
-	<h2>admin</h2>
+<article>
+	<h1>admin</h1>
 	<form action="./admin/{{article is defined ? "update" : "create"}}" method="POST">
-		<h3><label for="article-title">タイトル</label></h3>
+		<h2><label for="article-title">タイトル</label></h2>
 		<p>
 			記事のタイトルです。
 		</p>
 		<p>
-			<input type="text" name="article-title" id="article-title" value="{{article is defined ? article.title|e : ""}}" size="50" />
+			<input type="text" name="article-title" id="article-title" value="{{article is defined ? article.title|e : ""}}" size="50">
 		</p>
-		<h3><label for="article-tags">タグ</label></h3>
+		<h2><label for="article-tags">タグ</label></h2>
 		<p>
 			記事のタグです。（半角コンマ区切り、先頭末尾の空白は無視）
 		</p>
 		<p>
-			<input type="text" name="article-tags" id="article-tags" value="{{article is defined ? article.tags_string|e : ""}}" size="50" />
+			<input type="text" name="article-tags" id="article-tags" value="{{article is defined ? article.tags_string|e : ""}}" size="50">
 		</p>
-		<h3><label for="article-text">本文</label></h3>
+		<h2><label for="article-text">本文</label></h2>
 		<p>
 			記事の本文です。
 		</p>
 		<p>
 			<textarea name="article-text" id="article-text" rows="20" cols="50">{{article is defined ? article.text|e : ""}}</textarea>
 		</p>
-		<h4>投稿</h4>
+		<h2>投稿</h2>
 		<p>
-			<input type="submit" value="送信" /><input type="reset" value="消去" />
-			<input type="hidden" name="token" id="token" value="{{token}}" />
+			<input type="submit" value="送信" /><input type="reset" value="消去">
+			<input type="hidden" name="token" id="token" value="{{token}}">
 			{% if article is defined %}
-			<input type="hidden" name="article-id" id="article-id" value="{{article.id}}" />
+			<input type="hidden" name="article-id" id="article-id" value="{{article.id}}">
 			{% endif %}
 		</p>
 	</form>
-</div>
+</article>
 {% endblock %}

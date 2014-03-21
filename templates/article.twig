@@ -1,8 +1,16 @@
-<div class="article">
-	<h2>{{article.title|e}}</h2>
-	<div class="timestamps">
-		<span class="posted-at">{{article.created_at|date}}</span>
-	</div>
+<article>
+	<header>
+		<h1>{{article.title|e}}</h1>
+	</header>
+	<aside class="timestamps">
+		<time class="posted-at">{{article.created_at|date}}</time>
+	</aside>
+	<aside class="tags">
+	{% if article.tags is empty %}
+	No tags
+	{% else %}
 	{% include "tags.twig" with {tags: article.tags} %}
+	{% endif %}
+	</aside>
 	{{article.text|markdown|raw}}
-</div>
+</article>
