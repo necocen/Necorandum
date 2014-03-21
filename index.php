@@ -16,10 +16,12 @@ $mode = NULL;
 $admin = FALSE;
 $id = 0;
 $tag_id = 0;
+$page = 0;
 if(array_key_exists("admin", $_GET)) $admin = (intval($_GET["admin"]) === 1);
 if(array_key_exists("mode", $_GET)) $mode = strtolower($_GET["mode"]);
 if(array_key_exists("id", $_GET)) $id = intval($_GET["id"]);
 if($id === 0 && array_key_exists("tagid", $_GET)) $tag_id = intval($_GET["tagid"]);
+if(array_key_exists("page", $_GET)) $page = intval($_GET["page"]);
 
 $redirect_to = NULL;
 $error = NULL;
@@ -130,13 +132,18 @@ else
 	{
 		$template = "layout.twig";
 		$tag = Tag::with("articles")->where("id", "=", $tag_id)->first();
-		// TODO: ０件のケース
-		$layout_variables += ["articles" => $tag->articles()->orderBy("created_at", "desc")->with("tags")->get()];
+		$app = $GLOBALS["config"]["system"]["articles_per_page"];
+		$articles = $tag->articles()->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->with("tags")->get();
+		$count = count($articles);
+		$layout_variables += ["articles" => $articles, "tag" => $tag, "page" => $page];
 	}
 	else
 	{
 		$template = "layout.twig";
-		$layout_variables += ["articles" => Article::with("tags")->orderBy("created_at", "desc")->get()];
+		$app = $GLOBALS["config"]["system"]["articles_per_page"];
+		$articles = Article::with("tags")->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->get();
+		$count = count($articles);
+		$layout_variables += ["articles" => $articles];
 	}
 }
 
