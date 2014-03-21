@@ -47,14 +47,15 @@ if($admin)
 	{
 		if(array_key_exists("article-id", $_POST))
 		{
+			$id = intval($_POST["article-id"]);
 			if(update_article($_POST))
 			{
-				$redirect_to = "/"; // TODO: ID
+				$redirect_to = "/" . strval($id);
 				$info += ["記事を更新しました"];
 			}
 			else
 			{
-				$redirect_to = "/admin/edit/"; // TODO: ID
+				$redirect_to = "/admin/edit/" . strval($id);
 				$warn += ["記事の更新に失敗しました"];
 			}
 		}
@@ -73,10 +74,10 @@ if($admin)
 	{
 		// TODO: ログアウト
 	}
-	else
-	{
-//		$error = 404; // Not Found
-	}
+}
+else if($mode === "login")
+{
+	// TODO: ログイン
 }
 
 // リダイレクト
@@ -97,7 +98,6 @@ $layout_variables = [
 	"system" => $GLOBALS["system"]
 	];
 
-
 if(!is_null($error)) // エラー？
 {
 	// 404ページ？
@@ -106,12 +106,25 @@ else if($admin) // 管理ページ？
 {
 	$layout_variables += ["admin" => TRUE, "embed_ga" => FALSE];
 	$template = "admin.twig";
+	if($mode === "edit" && $id != 0)
+	{
+		$article = Article::with("tags")->find($id);
+		$layout_variables += ["article" => $article];
+	}
+	else if($mode === "tag" && $tag_id != 0)
+	{
+		// TODO: タグの編集
+	}
 }
 else
 {
 	if($id != 0)
 	{
 		// 記事単体ページのレイアウトはちょっと変える可能性がある
+		$template = "layout.twig";
+		$article = Article::with("tags")->find($id);
+		// TODO: ０件のケース
+		$layout_variables += ["articles" => [$article], "lonely" => TRUE];
 	}
 	else if($tag_id != 0)
 	{

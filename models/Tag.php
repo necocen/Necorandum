@@ -9,7 +9,8 @@ class Tag extends \LaravelBook\Ardent\Ardent
 	public static $rules = [
 		"name" => "required|min:1"
 		];
-
+	
+	public $timestamps = FALSE;
 }
 
 ?>

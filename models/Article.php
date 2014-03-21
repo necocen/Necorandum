@@ -10,6 +10,11 @@ class Article extends \LaravelBook\Ardent\Ardent
 		"title" => "required|min:1",
 		"text" => "required|min:1"
 		];
+
+	function tags_string()
+	{
+		return implode(",", array_map(function ($tag) { return $tag->name; }, $this->tags->all()));
+	}
 }
 
 ?>

@@ -30,14 +30,14 @@ RewriteRule	^admin/logout$	?admin=1&mode=logout		[L]
 # 管理画面
 RewriteRule	^admin/?$				?admin=1								[L]
 RewriteRule	^admin/new$			?admin=1&mode=new				[L]
-RewriteRule	^admin/edit$		?admin=1&mode=edit			[QSA] # idはクエリで指定
-RewriteRule	^admin/config$	?admin=1&mode=config		[L]
+RewriteRule	^admin/edit/([1-9][0-9]*)$		?admin=1&mode=edit&id=$1		[L]
+RewriteRule	^admin/tag/([1-9][0-9]*)$			?admin=1&mode=tag&tagid=$1	[L]
 
 # そのほかのページ
-# RewriteRule	^atom$					?mode=feed&type=atom		[QSA] # page
-# RewriteRule	^rss2$					?mode=feed&type=rss2		[QSA] # page
+# RewriteRule	^atom$				?mode=atom							[QSA] # page
+# RewriteRule	^rss2$				?mode=rss2							[QSA] # page
 
 # 記事
-RewriteRule	^([1-9][0-9]*)$	?id=$1									[L]
-RewriteRule ^tags/([1-9][0-9]*)$ ?tagid=$1						[QSA] # page
+RewriteRule	^([1-9][0-9]*)$			?id=$1							[L]
+RewriteRule	^tag/([1-9][0-9]*)$	?tagid=$1						[QSA] # page
 
