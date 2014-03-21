@@ -101,6 +101,7 @@ div#foot
 div.article
 {
 	margin: 4ex 0;
+	font-size: small;
 }
 
 div.article h2
@@ -112,7 +113,6 @@ div.article h2
 div.article p
 {
 	margin: 2ex 0;
-	font-size: small;
 	line-height: 170%;
 	text-align: justify;
 	text-justify: inter-ideograph;
@@ -136,3 +136,4 @@ div.article ul.tags:after {clear:both;}
 
 h1, h2, h3, h4, h5, h6 {font-family: "Hiragino Mincho ProN W3", "Yu Mincho", Meiryo;}
 ul.tags, div.timestamps {font-family: Georgia, "Hiragino Mincho ProN W3", "Yu Mincho", Meiryo, serif;}
+code {font-family: Ricty, Consolas, Monaco, "Courier New", monospace;}

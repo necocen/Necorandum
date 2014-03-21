@@ -9,6 +9,13 @@
 		<meta name="reply-to" content="{{config.site.email}}" />
 		<base href="http://{{system.base}}/" />
 		<link rel="stylesheet" href="./css/main.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/{{config.site.highlight_theme}}.min.css" media="screen" />
+		<script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+		<script>
+//<![CDATA[
+	hljs.configure({tabReplace: "    "});
+	hljs.initHighlightingOnLoad();
+//]]></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 		<script type="text/javascript" src="./main.js"></script>
 {% if embed_ga %}

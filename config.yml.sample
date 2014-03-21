@@ -14,3 +14,4 @@ site:
   email: "necocen@gmail.com"
   author: "κねこせん"
   ga_code: "UA-AAAAAAAA-A"
+  highlight_theme: "default"
