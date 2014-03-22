@@ -111,8 +111,8 @@ address
 
 article
 {
-	margin: 8ex 0;
-	font-size: small;
+	margin: 4ex 0 8ex 0;
+	font-size: 82%;
 }
 
 article > p, article > ul, article > ol
@@ -120,7 +120,11 @@ article > p, article > ul, article > ol
 	line-height: 170%;
 }
 
-article h1 {font-weight: bold;}
+article h1
+{
+	font-weight: bold;
+	border-bottom: 1px solid black;
+}
 
 article h1, article h2, article h3, article h4, article h5, article h6
 {
@@ -191,3 +195,54 @@ aside.tags:after {clear:both;}
 h1 {font-family: "Hiragino Mincho ProN W3", YuMincho, "游明朝", "HGS明朝E", Meiryo;}
 aside.tags, aside.timestamps, address {font-family: Georgia, "Hiragino Mincho ProN W3", YuMincho, "游明朝", Meiryo, serif;}
 code {font-family: Ricty, Consolas, Monaco, "Courier New", monospace;}
+
+
+
+/* forms */
+input[type=text],
+input[type=password],
+textarea
+{
+	background-color: #fff;
+	border: 1px solid #aaa;
+	line-height: 20px;
+	font-family: monospace;
+	width: 100%;
+}
+input[type=text]:focus,
+input[type=password]:focus,
+textarea:focus {background-color: #eee;}
+
+input[type=checkbox] {vertical-align: middle;}
+
+input[type=submit],
+input[type=reset],
+input[type=button]
+{
+	margin: 4px;
+	padding: 4px;
+	background-color: #fff;
+	border: 1px solid #aaa;
+	line-height: 20px;
+}
+input[type=submit]:hover,
+input[type=reset]:hover,
+input[type=button]:hover
+{
+	background-color: #eee;
+}
+input[type=submit]:active,
+input[type=reset]:active,
+input[type=button]:active
+{
+	background-color: #ddd;
+}
+
+input[type=button][disabled=disabled]
+{
+	background-color: #fff;
+	border-color: #eee;
+	color: #ddd;
+}
+
+

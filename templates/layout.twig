@@ -17,6 +17,15 @@
 	hljs.initHighlightingOnLoad();
 //]]></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+		<script type="text/javascript" src="./taboverride.min.js"></script>
+		<script type="text/javascript" src="./jquery.taboverride.min.js"></script>
+		<script>
+//<![CDATA[
+	$(document).ready(function() {
+		$("textarea").tabOverride(true);
+		$.fn.tabOverride.autoIndent(true);
+	});
+//]]></script>
 		<script type="text/javascript" src="./main.js"></script>
 {% if embed_ga %}
 		<script type="text/javascript">
