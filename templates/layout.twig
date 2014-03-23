@@ -17,6 +17,7 @@
 	hljs.initHighlightingOnLoad();
 //]]></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+{% if admin %}
 		<script type="text/javascript" src="./taboverride.min.js"></script>
 		<script type="text/javascript" src="./jquery.taboverride.min.js"></script>
 		<script>
@@ -26,6 +27,7 @@
 		$.fn.tabOverride.autoIndent(true);
 	});
 //]]></script>
+{% endif %}
 		<script type="text/javascript" src="./main.js"></script>
 {% if embed_ga %}
 		<script type="text/javascript">
@@ -50,8 +52,7 @@
 					<h1>{{config.site.title|e}}</h1>
 				</div>
 				<div id="menu">
-					<ul class="tags">
-				</ul>
+					{% include "tags.twig" with {tags: tags} %}
 				</div>
 			</header>
 			<hr>

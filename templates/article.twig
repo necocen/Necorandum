@@ -6,9 +6,7 @@
 		<time class="posted-at">{{article.created_at|date}}</time>
 	</aside>
 	<aside class="tags">
-	{% if article.tags is empty %}
-	No tags
-	{% else %}
+	{% if article.tags is not empty %}
 	{% include "tags.twig" with {tags: article.tags} %}
 	{% endif %}
 	</aside>

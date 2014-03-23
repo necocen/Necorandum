@@ -38,7 +38,6 @@ pre
 	word-wrap: break-word;
 }
 
-ul.tags:before {content: "Tags: ";}
 
 ul.tags li {display: inline-block;}
 ul.tags li:before {content: " / ";}
@@ -179,18 +178,23 @@ article ul, article ol
 	padding: 0 0 0 2em;
 }
 
-article > ul, article > ol
+article > ul, article > ol, blockquote > ul, blockquote > ol
 {
 	margin: 1ex 0;
 }
 
 aside.tags, aside.timestamps {font-size: small;}
 
-aside.timestamps {float: left;}
+aside.tags > ul
+{
+	padding: 0;
+}
 
-aside.tags {text-align:right;}
+/*aside.timestamps {float: left;}*/
 
-aside.tags:after {clear:both;}
+/*aside.tags {text-align:right;}*/
+
+/*aside.tags:after {clear:both;}*/
 
 h1 {font-family: "Hiragino Mincho ProN W3", YuMincho, "游明朝", "HGS明朝E", Meiryo;}
 aside.tags, aside.timestamps, address {font-family: Georgia, "Hiragino Mincho ProN W3", YuMincho, "游明朝", Meiryo, serif;}
