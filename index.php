@@ -29,6 +29,14 @@ $info = [];
 $warn = [];
 $mime_type = NULL;
 
+// クッキーでログイン判定
+if(array_key_exists("password", $_COOKIE) && $_COOKIE["password"] == Configuration::first()->password)
+{
+	$_SESSION["login"] = TRUE;
+	// クッキー延命
+	setcookie("password", $_COOKIE["password"], time() + 86400 * $GLOBALS["config"]["system"]["cookie_expire_date"]);
+}
+
 // ここでやるのはリダイレクト系だけ
 if($admin)
 {
@@ -81,6 +89,7 @@ if($admin)
 	{
 		$redirect_to = "/";
 		$_SESSION["login"] = FALSE;
+		setcookie("password", "", time() - 1);
 		$info += ["ログアウトしました"];
 	}
 }
@@ -89,6 +98,7 @@ else if($mode === "login")
 	// TODO: check password
 	$redirect_to = "/admin";
 	$_SESSION["login"] = TRUE;
+	setcookie("password", "", time() + 86400 * $GLOBALS["config"]["system"]["cookie_expire_date"]);
 	$info += ["ログインしました"];
 }
 
@@ -107,7 +117,8 @@ ob_start("ob_gzhandler");
 $layout_variables = [
 	"config" => $GLOBALS["config"],
 	"system" => $GLOBALS["system"],
-	"embed_ga" => TRUE
+	"embed_ga" => TRUE,
+	"login" => isset($_SESSION["login"]) ? $_SESSION["login"] : FALSE
 	];
 
 if(!is_null($error)) // エラー？
@@ -168,6 +179,9 @@ print $GLOBALS["twig"]->render($template, $layout_variables);
 // MIMEタイプヘッダ出力
 if(is_null($mime_type)) $mime_type = "text/html";
 header(sprintf("Content-Type: %s; charset=utf-8", $mime_type));
+header("Content-Script-Type: text/javascript");
+header("Content-Style-Type: text/css");
+
 
 finalize();
 
