@@ -15,3 +15,6 @@ site:
   author: "κねこせん"
   ga_code: "UA-AAAAAAAA-A"
   highlight_theme: "default"
+admin:
+  password: "admin-pass" # 初回のみ必要、DBのパスワードを上書きする
+

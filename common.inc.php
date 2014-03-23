@@ -95,19 +95,39 @@ function init_necorandum()
 
 	// 期限切れトークン削除
 //	clear_token();
+
+	$password = NULL;
+	if(array_key_exists("admin", $GLOBALS["config"]) && array_key_exists("password", $GLOBALS["config"]["admin"]))
+		$password = strval($GLOBALS["config"]["admin"]["password"]);
+
+	$article = Article::first();
+
+	$configuration = Configuration::first();
+	if(!$configuration)
+	{
+		$configuration = new Configuration();
+		if(is_null($password)) return FALSE;
+	}
+
+	// config.ymlにパスワードがあったら上書きする
+	if(!is_null($password))
+	{
+		$configuration->password = blowfish($password);
+		$configuration->save();
+	}
 	
 	return TRUE;
 }
+
 
 function finalize()
 {
 }
 
-
-// HTML special chars
-function h($text)
+// ハッシュ
+function blowfish($string)
 {
-	return htmlspecialchars($text, ENT_QUOTES, "UTF-8");
+	return crypt($string, $GLOBALS["config"]["system"]["blowfish_salt"]);
 }
 
 ?>
