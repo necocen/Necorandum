@@ -5,7 +5,7 @@ require_once "config.inc.php";
 require_once "common.inc.php";
 require_once "controller.inc.php";
 
-if(!init_necorandum())
+if(!init_necorandum() || !session_start())
 {
 	header(sprintf("HTTP/1.1 500 %s", "neko"));
 	die("fatal");
@@ -32,7 +32,12 @@ $mime_type = NULL;
 // ここでやるのはリダイレクト系だけ
 if($admin)
 {
-	if($mode === "create")
+	if(!is_null($mode) && !$_SESSION["login"])
+	{
+		$redirect_to = "/admin";
+		$warn += ["ログインしていません"];
+	}
+	else if($mode === "create")
 	{
 		if(create_article($_POST))
 		{
@@ -74,12 +79,17 @@ if($admin)
 	}
 	else if($mode === "logout")
 	{
-		// TODO: ログアウト
+		$redirect_to = "/";
+		$_SESSION["login"] = FALSE;
+		$info += ["ログアウトしました"];
 	}
 }
 else if($mode === "login")
 {
-	// TODO: ログイン
+	// TODO: check password
+	$redirect_to = "/admin";
+	$_SESSION["login"] = TRUE;
+	$info += ["ログインしました"];
 }
 
 // リダイレクト
@@ -93,11 +103,11 @@ if(is_string($redirect_to) && strlen($redirect_to) > 0)
 // 圧縮バッファ
 ob_start("ob_gzhandler");
 
-
 // twig
 $layout_variables = [
 	"config" => $GLOBALS["config"],
-	"system" => $GLOBALS["system"]
+	"system" => $GLOBALS["system"],
+	"embed_ga" => TRUE
 	];
 
 if(!is_null($error)) // エラー？
@@ -106,10 +116,12 @@ if(!is_null($error)) // エラー？
 }
 else if($admin) // 管理ページ？
 {
-	$layout_variables += ["admin" => TRUE, "embed_ga" => FALSE];
+	$layout_variables += ["admin" => TRUE];
+	$layout_variables["embed_ga"] = FALSE;
 	$template = "admin.twig";
 	if($mode === "edit" && $id != 0)
 	{
+		$template = "admin_article.twig";
 		$article = Article::with("tags")->find($id);
 		$layout_variables += ["article" => $article];
 	}
@@ -125,6 +137,7 @@ else
 		// 記事単体ページのレイアウトはちょっと変える可能性がある
 		$template = "layout.twig";
 		$article = Article::with("tags")->find($id);
+		$tags = Tag::orderBy("name", "asc")->get();
 		// TODO: ０件のケース
 		$layout_variables += ["articles" => [$article], "lonely" => TRUE];
 	}
@@ -132,10 +145,11 @@ else
 	{
 		$template = "layout.twig";
 		$tag = Tag::with("articles")->where("id", "=", $tag_id)->first();
+		$tags = Tag::orderBy("name", "asc")->get();
 		$app = $GLOBALS["config"]["system"]["articles_per_page"];
 		$articles = $tag->articles()->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->with("tags")->get();
 		$count = count($articles);
-		$layout_variables += ["articles" => $articles, "tag" => $tag, "page" => $page];
+		$layout_variables += ["articles" => $articles, "tag" => $tag, "tags" => $tags, "page" => $page];
 	}
 	else
 	{
@@ -143,7 +157,8 @@ else
 		$app = $GLOBALS["config"]["system"]["articles_per_page"];
 		$articles = Article::with("tags")->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->get();
 		$count = count($articles);
-		$layout_variables += ["articles" => $articles];
+		$tags = Tag::orderBy("name", "asc")->get();
+		$layout_variables += ["articles" => $articles, "tags" => $tags];
 	}
 }
 
