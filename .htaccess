@@ -22,7 +22,7 @@ php_flag magic_quotes_sybase Off
 RewriteEngine On
 
 # リダイレクトする子たち
-RewriteRule	^admin/login$		?admin=1&mode=login			[L]
+RewriteRule	^login$					?mode=login			[L]
 RewriteRule	^admin/create$	?admin=1&mode=create		[L]
 RewriteRule	^admin/update$	?admin=1&mode=update		[L]
 RewriteRule	^admin/logout$	?admin=1&mode=logout		[L]
