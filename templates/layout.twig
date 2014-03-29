@@ -16,15 +16,14 @@
 	hljs.configure({tabReplace: "    "});
 	hljs.initHighlightingOnLoad();
 //]]></script>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 {% if admin %}
+		<script type="text/javascript" src="./zepto.min.js"></script>
 		<script type="text/javascript" src="./taboverride.min.js"></script>
-		<script type="text/javascript" src="./jquery.taboverride.min.js"></script>
 		<script>
 //<![CDATA[
 	$(document).ready(function() {
-		$("textarea").tabOverride(true);
-		$.fn.tabOverride.autoIndent(true);
+		tabOverride.set($("textarea"));
+		tabOverride.autoIndent(true);
 	});
 //]]></script>
 {% endif %}
