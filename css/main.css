@@ -1,5 +1,11 @@
 @charset "utf-8";
 
+@font-face
+{
+	font-family: "typicons";
+	src: url("typicons-selected.woff") format("woff");
+}
+
 *
 {
 	margin: 0;
