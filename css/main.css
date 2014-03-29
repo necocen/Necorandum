@@ -2,8 +2,13 @@
 
 @font-face
 {
-	font-family: "typicons";
+	font-family: typicons;
 	src: url("typicons-selected.woff") format("woff");
+}
+
+.typicons
+{
+	font-family: typicons;
 }
 
 *
