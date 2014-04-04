@@ -47,15 +47,17 @@
 	<body>
 		<div id="container">
 			<header>
-				<div id="title">
+				<div id="title" class="bound">
 					<h1>{{config.site.title|e}}</h1>
 				</div>
 				<div id="menu">
-					{% include "tags.twig" with {tags: tags} %}
+					<div class="bound">
+						{% include "tags.twig" with {tags: tags} %}
+					</div>
 				</div>
 			</header>
 			<hr>
-			<div id="main">
+			<div id="main" class="bound">
 				{% block contents %}
 				<div>
 					{% for article in articles %}
@@ -65,12 +67,24 @@
 						{% endif %}
 					{% endfor %}
 				</div>
+				<nav>
+					<ul id="prev-next">
+						<li>prev</li>
+						<li>next</li>
+					</ul>
+				</nav>
 				{% endblock %}
 			</div>
 			<hr>
 			<footer>
-				<div>
+				<div class="bound">
+					<a id="twitter" href="http://twitter.com/necocen">
+						<img src="./css/icon.jpg" alt="twitter@necocen">
+					</a>
 					<address>presented by {{config.site.author|e}} under CC0.</address>
+					<a id="cc0banner" rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+						<img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" width="88" height="31">
+					</a>
 				</div>
 			</footer>
 		</div>
