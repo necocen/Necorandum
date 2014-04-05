@@ -48,10 +48,13 @@
 		<div id="container">
 			<header>
 				<div id="title" class="bound">
-					<h1>{{config.site.title|e}}</h1>
+					<h1><a href="./"><span class="hidden">{{config.site.title|e}}</span></a></h1>
 				</div>
 				<div id="menu">
 					<div class="bound">
+						<form id="search" action="./" method="GET">
+							<input name="search" type="text"><input type="submit" value="&#xe81e;">
+						</form>
 						{% include "tags.twig" with {tags: tags} %}
 					</div>
 				</div>
@@ -67,19 +70,21 @@
 						{% endif %}
 					{% endfor %}
 				</div>
+				{% if not solely %}
 				<nav>
 					<ul id="prev-next">
 						<li>prev</li>
 						<li>next</li>
 					</ul>
 				</nav>
+				{% endif %}
 				{% endblock %}
 			</div>
 			<hr>
 			<footer>
 				<div class="bound">
 					<a id="twitter" href="http://twitter.com/necocen">
-						<img src="./css/icon.jpg" alt="twitter@necocen">
+						<img src="./css/icon.png" alt="twitter@necocen">
 					</a>
 					<address>presented by {{config.site.author|e}} under CC0.</address>
 					<a id="cc0banner" rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
