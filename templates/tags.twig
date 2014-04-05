@@ -1,5 +1,7 @@
+{% if tags is not empty %}
 <ul class="tags">
 {% for tag in tags %}
-	<li>{{tag.name}}</li>
+	<li><a href="./tag/{{tag.id}}" title="tag: {{tag.name|e}}">{{tag.name|e}}</a></li>
 {% endfor %}
 </ul>
+{% endif %}

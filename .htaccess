@@ -34,8 +34,7 @@ RewriteRule	^admin/edit/([1-9][0-9]*)$		?admin=1&mode=edit&id=$1		[L]
 RewriteRule	^admin/tag/([1-9][0-9]*)$			?admin=1&mode=tag&tagid=$1	[L]
 
 # そのほかのページ
-# RewriteRule	^atom$				?mode=atom							[QSA] # page
-# RewriteRule	^rss2$				?mode=rss2							[QSA] # page
+RewriteRule	^atom$				?mode=atom							[QSA] # page
 
 # 記事
 RewriteRule	^([1-9][0-9]*)$			?id=$1							[L]

@@ -72,7 +72,7 @@ div#title
 	background-position: 51% 30px;
 }
 
-div.bound
+.bound
 {
 	position: relative;
 	height: 100%;
@@ -104,9 +104,20 @@ form#search
 {
 	position: relative;
 	z-index: 12;
-	width: 33%;
+	width: 20%;
 	top: calc(50% - 1.25ex);
 	float: left;
+}
+
+nav.bound > a
+{
+	position: relative;
+	z-index: 12;
+	top: calc(50% - 1.25ex);
+	float: left;
+	margin-left: 1em;
+	font-size: 120%;
+	line-height: 140%;
 }
 
 div#title h1
@@ -114,8 +125,9 @@ div#title h1
 	position: relative;
 	display: block;
 	width: 400px;
-	height: 210px;
+	height: 180px;
 	margin: 0 auto;
+	padding-top: 30px;
 	z-index: 12;
 }
 
@@ -263,7 +275,7 @@ aside.timestamps:before
 
 /*aside.tags:after {clear:both;}*/
 
-h1 {font-family: "Hiragino Mincho ProN W3", YuMincho, "游明朝", "HGS明朝B", Meiryo;}
+h1 {font-family: "Hiragino Mincho ProN W3", YuMincho, "游明朝", "MS Mincho", Meiryo;}
 .tags, ul#prev-next, aside.timestamps, address {font-family: Georgia, "Hiragino Mincho ProN W3", YuMincho, "游明朝", Meiryo, serif;}
 code {font-family: Ricty, Consolas, Monaco, "Courier New", monospace;}
 
@@ -319,7 +331,7 @@ input[type=button][disabled=disabled]
 form#search > input[type=text]
 {
 	width: 140px;
-	max-width: calc(100% - 27px);
+	max-width: calc(100% - 28px);
 }
 form#search > input[type=submit]
 {
@@ -329,7 +341,7 @@ form#search > input[type=submit]
 	background-color: transparent;
 	border: none;
 	font-family: typicons;
-	font-size: 110%;
+	font-size: 120%;
 	cursor: pointer;
 }
 

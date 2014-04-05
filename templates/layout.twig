@@ -51,12 +51,18 @@
 					<h1><a href="./"><span class="hidden">{{config.site.title|e}}</span></a></h1>
 				</div>
 				<div id="menu">
-					<div class="bound">
+					<nav class="bound">
+						{% if not admin %}
 						<form id="search" action="./" method="GET">
-							<input name="search" type="text"><input type="submit" value="&#xe81e;">
+							<input name="search" type="text"><input type="submit" value="&#xe81d;">
 						</form>
+						<a href="./atom" title="Atom feed"><span class="typicons">&#xe803;</span></a>
+						{% if login %}
+						<a href="./admin" title="admin"><span class="typicons">&#xe823;</span></a>
+						{% endif %}
 						{% include "tags.twig" with {tags: tags} %}
-					</div>
+						{% endif %}
+					</nav>
 				</div>
 			</header>
 			<hr>

@@ -129,8 +129,12 @@ else if($admin) // 管理ページ？
 {
 	$layout_variables += ["admin" => TRUE];
 	$layout_variables["embed_ga"] = FALSE;
-	$template = "admin.twig";
-	if($mode === "edit" && $id != 0)
+	$template = "layout_admin.twig";
+	if($mode === "new")
+	{
+		$template = "admin_article.twig";
+	}
+	else if($mode === "edit" && $id != 0)
 	{
 		$template = "admin_article.twig";
 		$article = Article::with("tags")->find($id);
@@ -143,20 +147,19 @@ else if($admin) // 管理ページ？
 }
 else
 {
+	$tags = Tag::orderBy("name", "asc")->get();
 	if($id != 0)
 	{
 		// 記事単体ページのレイアウトはちょっと変える可能性がある
-		$template = "layout.twig";
+		$template = "layout_article.twig";
 		$article = Article::with("tags")->find($id);
-		$tags = Tag::orderBy("name", "asc")->get();
 		// TODO: ０件のケース
-		$layout_variables += ["articles" => [$article], "lonely" => TRUE];
+		$layout_variables += ["articles" => [$article], "tags" => $tags, "solely" => TRUE];
 	}
 	else if($tag_id != 0)
 	{
-		$template = "layout.twig";
+		$template = "layout_tag.twig";
 		$tag = Tag::with("articles")->where("id", "=", $tag_id)->first();
-		$tags = Tag::orderBy("name", "asc")->get();
 		$app = $GLOBALS["config"]["system"]["articles_per_page"];
 		$articles = $tag->articles()->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->with("tags")->get();
 		$count = count($articles);
@@ -168,7 +171,6 @@ else
 		$app = $GLOBALS["config"]["system"]["articles_per_page"];
 		$articles = Article::with("tags")->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->get();
 		$count = count($articles);
-		$tags = Tag::orderBy("name", "asc")->get();
 		$layout_variables += ["articles" => $articles, "tags" => $tags];
 	}
 }
