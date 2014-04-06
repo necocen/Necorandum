@@ -58,4 +58,11 @@ function update_article($post)
 	return $article->save();
 }
 
+function delete_article($post)
+{
+	if(!isset($post["article-id"])) return FALSE;
+
+	return Article::destroy(intval($post["article-id"]));
+}
+
 ?>

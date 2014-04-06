@@ -31,12 +31,22 @@
 		</p>
 		<h2>投稿</h2>
 		<p>
-			<input type="submit" value="送信" /><input type="reset" value="消去">
+			<input type="submit" value="送信"><input type="reset" value="消去">
 			<input type="hidden" name="token" id="token" value="{{token}}">
 			{% if article is defined %}
 			<input type="hidden" name="article-id" id="article-id" value="{{article.id}}">
 			{% endif %}
 		</p>
 	</form>
+	{% if article is defined %}
+	<form action="./admin/delete" method="POST">
+		<h2>削除</h2>
+		<p>
+			<input type="submit" value="削除">
+			<input type="hidden" name="token" id="token" value="{{token}}">
+			<input type="hidden" name="article-id" id="article-id" value="{{article.id}}">
+		</p>
+	</form>
+	{% endif %}
 </article>
 {% endblock %}

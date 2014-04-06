@@ -11,7 +11,6 @@ if(!init_necorandum() || !session_start())
 	die("fatal");
 }
 
-
 $mode = NULL;
 $admin = FALSE;
 $id = 0;
@@ -85,6 +84,22 @@ if($admin)
 			$warn += ["不正なIDへの編集です"];
 		}
 	}
+	else if($mode === "delete")
+	{
+		if(array_key_exists("article-id", $_POST))
+		{
+			if(delete_article($_POST))
+			{
+				$redirect_to = "/admin";
+				$info += ["記事を削除しました"];
+			}
+			else
+			{
+				$redirect_to = "/admin/edit/" . intval($_POST["article-id"]);
+				$warn += ["記事の削除に失敗しました"];
+			}
+		}
+	}
 	else if($mode === "logout")
 	{
 		$redirect_to = "/";
@@ -112,7 +127,6 @@ if(is_string($redirect_to) && strlen($redirect_to) > 0)
 
 // 圧縮バッファ
 ob_start("ob_gzhandler");
-
 // twig
 $layout_variables = [
 	"config" => $GLOBALS["config"],
@@ -189,5 +203,4 @@ finalize();
 
 // バッファ出力
 ob_end_flush();
-
 ?>
