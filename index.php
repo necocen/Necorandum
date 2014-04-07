@@ -33,13 +33,13 @@ if(array_key_exists("password", $_COOKIE) && $_COOKIE["password"] == Configurati
 {
 	$_SESSION["login"] = TRUE;
 	// クッキー延命
-	setcookie("password", $_COOKIE["password"], time() + 86400 * $GLOBALS["config"]["system"]["cookie_expire_date"]);
+	setcookie("password", $_COOKIE["password"], time() + 86400 * $GLOBALS["config"]["system"]["cookie_expire_date"], "/");
 }
 
 // ここでやるのはリダイレクト系だけ
 if($admin)
 {
-	if(!is_null($mode) && !$_SESSION["login"])
+	if(!is_null($mode) && !$_SESSION["login"]) // 未ログイン時のnew/editもここにくる
 	{
 		$redirect_to = "/admin";
 		$warn += ["ログインしていません"];
@@ -110,11 +110,18 @@ if($admin)
 }
 else if($mode === "login")
 {
-	// TODO: check password
 	$redirect_to = "/admin";
-	$_SESSION["login"] = TRUE;
-	setcookie("password", "", time() + 86400 * $GLOBALS["config"]["system"]["cookie_expire_date"]);
-	$info += ["ログインしました"];
+	if(blowfish($_POST["login-password"]) === Configuration::first()->password)
+	{
+		$_SESSION["login"] = TRUE;
+		setcookie("password", Configuration::first()->password, time() + 86400 * $GLOBALS["config"]["system"]["cookie_expire_date"], "/");
+		$info += ["ログインしました"];
+	}
+	else
+	{
+		$_SESSION["login"] = FALSE;
+		$warn += ["ログインに失敗しました"];
+	}
 }
 
 // リダイレクト
@@ -141,6 +148,7 @@ if(!is_null($error)) // エラー？
 }
 else if($admin) // 管理ページ？
 {
+	// 未ログインでは$modeがNULLの場合しか来ない
 	$layout_variables += ["admin" => TRUE];
 	$layout_variables["embed_ga"] = FALSE;
 	$template = "layout_admin.twig";
@@ -157,6 +165,10 @@ else if($admin) // 管理ページ？
 	else if($mode === "tag" && $tag_id != 0)
 	{
 		// TODO: タグの編集
+	}
+	else if($mode === "config")
+	{
+		// TODO: パスワードの変更？
 	}
 }
 else
