@@ -6,9 +6,6 @@ function init_necorandum()
 {
 	// set timezone
 	date_default_timezone_set("Asia/Tokyo");
-	
-	// authenticate
-//	$GLOBALS["system"]["authenticated"] = FALSE;
 
 	$use_parsedown = TRUE;
 
@@ -75,9 +72,6 @@ function init_necorandum()
 	$GLOBALS["twig"] = $twig;
 	
 
-	// 初回起動ですか？
-//	$GLOBALS["system"]["first"] = !has_config_table();
-
 	// ベースアドレス
 	$path_info = pathinfo($_SERVER["SCRIPT_NAME"]);
 	$dir_name = "";
@@ -88,13 +82,6 @@ function init_necorandum()
 	else
 		$GLOBALS["system"]["base"] =  $_SERVER["SERVER_NAME"];
 	$GLOBALS["system"]["host"] = $_SERVER["SERVER_NAME"];
-
-	// 設定読み込み（ただし初回起動時は無視）
-//	if(!$GLOBALS["system"]["first"])
-//		load_config();
-
-	// 期限切れトークン削除
-//	clear_token();
 
 	$password = NULL;
 	if(array_key_exists("admin", $GLOBALS["config"]) && array_key_exists("password", $GLOBALS["config"]["admin"]))
@@ -115,6 +102,12 @@ function init_necorandum()
 		$configuration->password = blowfish($password);
 		$configuration->save();
 	}
+
+	// セッション・ハンドラ
+	if(!session_set_save_handler(new MySQLSessionHandler(), TRUE))
+	{
+		return FALSE;
+	}
 	
 	return TRUE;
 }
@@ -128,6 +121,51 @@ function finalize()
 function blowfish($string)
 {
 	return crypt($string, $GLOBALS["config"]["system"]["blowfish_salt"]);
+}
+
+class MySQLSessionHandler implements SessionHandlerInterface
+{
+	public function open($save_path, $name)
+	{
+		return TRUE;
+	}
+
+	public function close()
+	{
+		return TRUE;
+	}
+
+	public function destroy($session_id)
+	{
+		if(!is_string($session_id)) return FALSE;
+
+		return Session::destroy($session_id);
+	}
+
+	public function read($session_id)
+	{
+		$session = Session::find($session_id);
+		if(is_null($session)) return "";
+		return $session->data;
+	}
+
+	public function write($session_id, $session_data)
+	{
+		$session = Session::find($session_id);
+		if(is_null($session))
+		{
+			$session = new Session();
+			$session->id = $session_id;
+		}
+		$session->data = $session_data;
+		$session->touch();
+		return $session->save();
+	}
+
+	public function gc($maxlifetime)
+	{
+		return Session::where('updated_at', '<', (new DateTime())->sub(new DateInterval(strval($maxlifetime) . "S")))->delete();
+	}
 }
 
 ?>

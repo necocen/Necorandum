@@ -5,7 +5,13 @@ require_once "config.inc.php";
 require_once "common.inc.php";
 require_once "controller.inc.php";
 
-if(!init_necorandum() || !session_start())
+if(!init_necorandum())
+{
+	header(sprintf("HTTP/1.1 500 %s", "neko"));
+	die("fatal");
+}
+
+if(!session_start())
 {
 	header(sprintf("HTTP/1.1 500 %s", "neko"));
 	die("fatal");
