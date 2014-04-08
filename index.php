@@ -29,11 +29,20 @@ $warn = [];
 $mime_type = NULL;
 
 // クッキーでログイン判定
-if(array_key_exists("password", $_COOKIE) && $_COOKIE["password"] == Configuration::first()->password)
+if(array_key_exists("password", $_COOKIE))
 {
-	$_SESSION["login"] = TRUE;
-	// クッキー延命
-	setcookie("password", $_COOKIE["password"], time() + 86400 * $GLOBALS["config"]["system"]["cookie_expire_date"], "/");
+	if($_COOKIE["password"] == Configuration::first()->password)
+	{
+		$_SESSION["login"] = TRUE;
+		// クッキー延命
+		setcookie("password", $_COOKIE["password"], time() + 86400 * $GLOBALS["config"]["system"]["cookie_expire_date"], "/");
+	}
+	else
+	{
+		// お前は誰なんだ
+		$_SESSION["login"] = FALSE;
+		setcookie("password", "", time() - 1, "/");
+	}
 }
 
 // ここでやるのはリダイレクト系だけ
