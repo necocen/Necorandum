@@ -65,4 +65,21 @@ function delete_article($post)
 	return Article::destroy(intval($post["article-id"]));
 }
 
+function update_config($post)
+{
+	if(!isset($post["password-old"])) return FALSE;
+	if(!isset($post["password-new"])) return FALSE;
+	if(!isset($post["password-confirm"])) return FALSE;
+
+	if($post["password-new"] !== $post["password-confirm"]) return FALSE;
+
+	$config = Configuration::first();
+	if(blowfish($post["password-old"]) !== $config->password) return FALSE;
+
+	$config->password = blowfish($post["password-new"]);
+	setcookie("password", $config->password, time() + 86400 * $GLOBALS["config"]["system"]["cookie_expire_date"], "/");
+
+	return $config->save();
+}
+
 ?>

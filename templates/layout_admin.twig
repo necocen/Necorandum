@@ -7,11 +7,25 @@
 	<header>
 		<h1>admin</h1>
 	</header>
+	{% if login %}
 	<p>
 		なんらかの管理ページです。
 	</p>
 	<ul>
 		<li><a href="./admin/new" title="記事の投稿">記事の投稿</a></li>
+		<li><a href="./admin/config" title="設定">設定</a></li>
+		<li><a href="./admin/logout" title="ログアウト">ログアウト</a></li>
 	</ul>
+	{% else %}
+	<form action="./login" method="POST">
+		<h2><label for="login-password">パスワードを入力してください。</label></h2>
+		<p>
+			<input name="login-password" id="login-password" type="password">
+		</p>
+		<p>
+			<input type="submit" value="送信">
+		</p>
+	</form>
+	{% endif %}
 </article>
 {% endblock %}

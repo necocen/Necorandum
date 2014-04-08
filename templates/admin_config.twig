@@ -1,0 +1,30 @@
+{% extends "layout.twig" %}
+
+{% block title %}パスワードの変更 - {{ parent() }}{% endblock %}
+
+{% block contents %}
+<article>
+	<header>
+		<h1>パスワードの変更</h1>
+	</header>
+	<form action="./admin/update_config" method="POST">
+		<h2><label for="password-old">古いパスワード</label></h2>
+		<p>
+			<input type="password" name="password-old" id="password-old" value="" size="50">
+		</p>
+		<h2><label for="password-new">新しいパスワード</label></h2>
+		<p>
+			<input type="password" name="password-new" id="password-new" value="" size="50">
+		</p>
+		<h2><label for="password-confirm">新しいパスワード（確認）</label></h2>
+		<p>
+			<input type="password" name="password-confirm" id="password-confirm" value="" size="50">
+		</p>
+		<h2>送信</h2>
+		<p>
+			<input type="submit" value="変更">
+			<input type="hidden" name="token" id="token" value="{{token}}">
+		</p>
+	</form>
+</article>
+{% endblock %}

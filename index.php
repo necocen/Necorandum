@@ -84,6 +84,19 @@ if($admin)
 			$warn += ["不正なIDへの編集です"];
 		}
 	}
+	else if($mode === "update_config")
+	{
+		if(update_config($_POST))
+		{
+			$redirect_to = "/admin";
+			$info += ["設定を更新しました"];
+		}
+		else
+		{
+			$redirect_to = "/admin/config";
+			$warn += ["設定の更新に失敗しました"];
+		}
+	}
 	else if($mode === "delete")
 	{
 		if(array_key_exists("article-id", $_POST))
@@ -104,7 +117,7 @@ if($admin)
 	{
 		$redirect_to = "/";
 		$_SESSION["login"] = FALSE;
-		setcookie("password", "", time() - 1);
+		setcookie("password", "", time() - 1, "/");
 		$info += ["ログアウトしました"];
 	}
 }
@@ -168,7 +181,7 @@ else if($admin) // 管理ページ？
 	}
 	else if($mode === "config")
 	{
-		// TODO: パスワードの変更？
+		$template = "admin_config.twig";
 	}
 }
 else

@@ -26,6 +26,7 @@ RewriteRule	^login$					?mode=login			[L]
 RewriteRule	^admin/create$	?admin=1&mode=create		[L]
 RewriteRule	^admin/update$	?admin=1&mode=update		[L]
 RewriteRule	^admin/delete$	?admin=1&mode=delete		[L]
+RewriteRule	^admin/update_config$	?admin=1&mode=update_config		[L]
 RewriteRule	^admin/logout$	?admin=1&mode=logout		[L]
 
 # 管理画面
