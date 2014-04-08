@@ -175,8 +175,6 @@ $layout_variables = [
 	"system" => $GLOBALS["system"],
 	"embed_ga" => TRUE,
 	"login" => isset($_SESSION["login"]) ? $_SESSION["login"] : FALSE,
-	"info" => $info,
-	"warn" => $warn
 	];
 
 if(!is_null($error)) // エラー？
@@ -197,7 +195,14 @@ else if($admin) // 管理ページ？
 	{
 		$template = "admin_article.twig";
 		$article = Article::with("tags")->find($id);
-		$layout_variables += ["article" => $article];
+		if(is_null($article))
+		{
+			$warn += ["存在しない記事を編集しようとしています"];
+		}
+		else
+		{
+			$layout_variables += ["article" => $article];
+		}
 	}
 	else if($mode === "tag" && $tag_id != 0)
 	{
@@ -211,13 +216,14 @@ else if($admin) // 管理ページ？
 else
 {
 	$tags = Tag::orderBy("name", "asc")->get();
+	$layout_variables += ["tags" => $tags];
 	if($id != 0)
 	{
 		// 記事単体ページのレイアウトはちょっと変える可能性がある
 		$template = "layout_article.twig";
 		$article = Article::with("tags")->find($id);
 		// TODO: ０件のケース
-		$layout_variables += ["articles" => [$article], "tags" => $tags, "solely" => TRUE];
+		$layout_variables += ["articles" => [$article], "solely" => TRUE];
 	}
 	else if($tag_id != 0)
 	{
@@ -226,7 +232,7 @@ else
 		$app = $GLOBALS["config"]["system"]["articles_per_page"];
 		$articles = $tag->articles()->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->with("tags")->get();
 		$count = count($articles);
-		$layout_variables += ["articles" => $articles, "tag" => $tag, "tags" => $tags, "page" => $page];
+		$layout_variables += ["articles" => $articles, "tag" => $tag, "page" => $page];
 	}
 	else
 	{
@@ -234,9 +240,11 @@ else
 		$app = $GLOBALS["config"]["system"]["articles_per_page"];
 		$articles = Article::with("tags")->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->get();
 		$count = count($articles);
-		$layout_variables += ["articles" => $articles, "tags" => $tags];
+		$layout_variables += ["articles" => $articles];
 	}
 }
+
+$layout_variables += ["info" => $info, "warn" => $warn];
 
 
 print $GLOBALS["twig"]->render($template, $layout_variables);
