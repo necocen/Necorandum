@@ -67,6 +67,18 @@
 			</header>
 			<hr>
 			<div id="main" class="bound">
+				{% if info is not empty or warn is not empty %}
+				<aside id="info">
+					<ul>
+						{% for message in info %}
+						<li>{{message}}</li>
+						{% endfor %}
+						{% for message in warn %}
+						<li class="warn">{{message}}</li>
+						{% endfor %}
+					</ul>
+				</aside>
+				{% endif%}
 				{% block contents %}
 				<div>
 					{% for article in articles %}
@@ -77,8 +89,8 @@
 					{% endfor %}
 				</div>
 				{% if not solely %}
-				<nav>
-					<ul id="prev-next">
+				<nav id="prev-next">
+					<ul>
 						<li>prev</li>
 						<li>next</li>
 					</ul>

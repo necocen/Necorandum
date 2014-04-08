@@ -90,7 +90,7 @@ if($admin)
 		else
 		{
 			$redirect_to = "/admin";
-			$warn += ["不正なIDへの編集です"];
+			$warn += ["不正な編集です"];
 		}
 	}
 	else if($mode === "update_config")
@@ -149,10 +149,17 @@ else if($mode === "login")
 // リダイレクト
 if(is_string($redirect_to) && strlen($redirect_to) > 0)
 {
-	// TODO: info, warn
+	$_SESSION["info"] = $info;
+	$_SESSION["warn"] = $warn;
 	header("Location: " . $redirect_to);
+	finalize();
 	die("Redirect");
 }
+
+if(isset($_SESSION["info"]) && is_array($_SESSION["info"])) $info = $_SESSION["info"];
+if(isset($_SESSION["warn"]) && is_array($_SESSION["warn"])) $warn = $_SESSION["warn"];
+$_SESSION["info"] = [];
+$_SESSION["warn"] = [];
 
 // 圧縮バッファ
 ob_start("ob_gzhandler");
@@ -161,7 +168,9 @@ $layout_variables = [
 	"config" => $GLOBALS["config"],
 	"system" => $GLOBALS["system"],
 	"embed_ga" => TRUE,
-	"login" => isset($_SESSION["login"]) ? $_SESSION["login"] : FALSE
+	"login" => isset($_SESSION["login"]) ? $_SESSION["login"] : FALSE,
+	"info" => $info,
+	"warn" => $warn
 	];
 
 if(!is_null($error)) // エラー？

@@ -145,17 +145,31 @@ div#main
 	margin: 0 auto;
 }
 
-ul#prev-next
+aside#info ul
+{
+	margin: 2ex 0;
+	padding: 1ex 1em;
+	border: 1px solid black;
+}
+
+aside#info ul li
+{
+	margin-left: 1em;
+	font-size: small;
+}
+aside#info ul li.warn {color: red;}
+
+nav#prev-next ul
 {
 	margin: 4ex auto;
 	text-align: center;
 }
 
-ul#prev-next li
+nav#prev-next ul li
 {
 	display: inline-block;
 }
-ul#prev-next li:first-child:after
+nav#prev-next ul li:first-child:after
 {
 	content: " /";
 	margin: 0 1em;
@@ -276,7 +290,7 @@ aside.timestamps:before
 /*aside.tags:after {clear:both;}*/
 
 h1 {font-family: "Hiragino Mincho ProN W3", YuMincho, "游明朝", "MS Mincho", Meiryo;}
-.tags, ul#prev-next, aside.timestamps, address {font-family: Georgia, "Hiragino Mincho ProN W3", YuMincho, "游明朝", Meiryo, serif;}
+.tags, nav#prev-next, aside.timestamps, address {font-family: Georgia, "Hiragino Mincho ProN W3", YuMincho, "游明朝", Meiryo, serif;}
 code {font-family: Ricty, Consolas, Monaco, "Courier New", monospace;}
 
 
