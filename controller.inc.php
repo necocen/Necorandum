@@ -2,6 +2,7 @@
 
 function create_article($post)
 {
+	if(!isset($post["token"]) || !check_token($post["token"])) return FALSE;
 	if(!isset($post["article-text"])) return FALSE;
 	
 	$article = new Article();
@@ -40,6 +41,7 @@ function tag_ids($tags_string)
 
 function update_article($post)
 {
+	if(!isset($post["token"]) || !check_token($post["token"])) return FALSE;
 	if(!isset($post["article-id"])) return FALSE;
 	if(!isset($post["article-text"])) return FALSE;
 	
@@ -60,6 +62,7 @@ function update_article($post)
 
 function delete_article($post)
 {
+	if(!isset($post["token"]) || !check_token($post["token"])) return FALSE;
 	if(!isset($post["article-id"])) return FALSE;
 
 	return Article::destroy(intval($post["article-id"]));
@@ -67,6 +70,7 @@ function delete_article($post)
 
 function update_config($post)
 {
+	if(!isset($post["token"]) || !check_token($post["token"])) return FALSE;
 	if(!isset($post["password-old"])) return FALSE;
 	if(!isset($post["password-new"])) return FALSE;
 	if(!isset($post["password-confirm"])) return FALSE;

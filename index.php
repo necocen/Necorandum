@@ -189,10 +189,12 @@ else if($admin) // 管理ページ？
 	$template = "layout_admin.twig";
 	if($mode === "new")
 	{
+		$layout_variables += ["token" => generate_token()];
 		$template = "admin_article.twig";
 	}
 	else if($mode === "edit" && $id != 0)
 	{
+		$layout_variables += ["token" => generate_token()];
 		$template = "admin_article.twig";
 		$article = Article::with("tags")->find($id);
 		if(is_null($article))
@@ -210,6 +212,7 @@ else if($admin) // 管理ページ？
 	}
 	else if($mode === "config")
 	{
+		$layout_variables += ["token" => generate_token()];
 		$template = "admin_config.twig";
 	}
 }

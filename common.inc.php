@@ -103,6 +103,9 @@ function init_necorandum()
 		$configuration->save();
 	}
 
+	// 古いトークンの削除
+	gc_token();
+
 	// セッション・ハンドラ
 	if(!session_set_save_handler(new MySQLSessionHandler(), TRUE))
 	{
@@ -115,6 +118,30 @@ function init_necorandum()
 
 function finalize()
 {
+}
+
+// トークン
+function generate_token()
+{
+	$token = new Token();
+	$token->id = sha1(uniqid(rand(), true));
+	$token->expires_at = (new DateTime())->add(new DateInterval("P" . strval($GLOBALS["config"]["system"]["token_expires"]) . "D"));
+	if(!$token->save()) return NULL;
+	return $token->id;
+}
+
+function check_token($token_id)
+{
+	$token = Token::find($token_id);
+	if(is_null($token)) return FALSE;
+
+	$token->delete();
+	return TRUE;
+}
+
+function gc_token()
+{
+	Token::where('expires_at', '<=', new DateTime())->delete();
 }
 
 // ハッシュ
@@ -164,7 +191,7 @@ class MySQLSessionHandler implements SessionHandlerInterface
 
 	public function gc($maxlifetime)
 	{
-		return Session::where('updated_at', '<', (new DateTime())->sub(new DateInterval(strval($maxlifetime) . "S")))->delete();
+		return Session::where('updated_at', '<', (new DateTime())->sub(new DateInterval("PT" . strval($maxlifetime) . "S")))->delete();
 	}
 }
 
