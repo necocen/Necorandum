@@ -182,11 +182,7 @@ $layout_variables = [
 	"login" => isset($_SESSION["login"]) ? $_SESSION["login"] : FALSE,
 	];
 
-if(!is_null($error)) // エラー？
-{
-	// 404ページ？
-}
-else if($admin) // 管理ページ？
+if($admin) // 管理ページ？
 {
 	// 未ログインでは$modeがNULLの場合しか来ない
 	$layout_variables += ["admin" => TRUE];
@@ -230,7 +226,7 @@ else
 		// 記事単体ページのレイアウトはちょっと変える可能性がある
 		$template = "layout_article.twig";
 		$article = Article::with("tags")->find($id);
-		// TODO: ０件のケース
+		if(is_null($article)) $error = 404;
 		$layout_variables += ["articles" => [$article], "solely" => TRUE];
 	}
 	else if($tag_id != 0)
@@ -239,7 +235,7 @@ else
 		$tag = Tag::with("articles")->where("id", "=", $tag_id)->first();
 		$app = $GLOBALS["config"]["system"]["articles_per_page"];
 		$articles = $tag->articles()->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->with("tags")->get();
-		$count = count($articles);
+		if(count($articles) === 0) $error = 404;
 		$layout_variables += ["articles" => $articles, "tag" => $tag, "page" => $page];
 	}
 	else
@@ -247,7 +243,7 @@ else
 		$template = "layout.twig";
 		$app = $GLOBALS["config"]["system"]["articles_per_page"];
 		$articles = Article::with("tags")->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->get();
-		$count = count($articles);
+		if(count($articles) === 0) $error = 404;
 		$layout_variables += ["articles" => $articles];
 	}
 }
@@ -255,7 +251,15 @@ else
 $layout_variables += ["info" => $info, "warn" => $warn];
 
 
-print $GLOBALS["twig"]->render($template, $layout_variables);
+if(is_null($error)) // エラーがない
+{
+	print $GLOBALS["twig"]->render($template, $layout_variables);
+}
+else
+{
+	// エラーページ
+	// ヘッダも？
+}
 
 // MIMEタイプヘッダ出力
 if(is_null($mime_type)) $mime_type = "text/html";

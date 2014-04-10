@@ -124,7 +124,7 @@ function finalize()
 function generate_token()
 {
 	$token = new Token();
-	$token->id = sha1(uniqid(rand(), true));
+	$token->id = uniqid('', true);
 	$token->expires_at = (new DateTime())->add(new DateInterval("P" . strval($GLOBALS["config"]["system"]["token_expires"]) . "D"));
 	if(!$token->save()) return NULL;
 	return $token->id;
