@@ -127,6 +127,11 @@ if($admin)
 				$warn += ["記事の削除に失敗しました"];
 			}
 		}
+		else
+		{
+			$redirect_to = "/admin";
+			$warn += ["不正な編集です"];
+		}
 	}
 	else if($mode === "logout")
 	{
