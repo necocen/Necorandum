@@ -198,13 +198,13 @@ try
 		{
 			$token = generate_token();
 			$layout_variables += ["token" => $token];
-			$template = "admin_article.twig";
+			$template = "layout_admin_article.twig";
 		}
 		else if($mode === "edit" && $id != 0)
 		{
 			$token = generate_token();
 			$layout_variables += ["token" => $token];
-			$template = "admin_article.twig";
+			$template = "layout_admin_article.twig";
 			$article = Article::with("tags")->find($id);
 			if(is_null($article))
 			{
@@ -224,7 +224,7 @@ try
 		{
 			$token = generate_token();
 			$layout_variables += ["token" => $token];
-			$template = "admin_config.twig";
+			$template = "layout_admin_config.twig";
 		}
 	}
 	else
@@ -235,7 +235,7 @@ try
 		{
 			// 記事単体ページのレイアウトはちょっと変える可能性がある
 			$template = "layout_article.twig";
-			$article = Article::with("tags")->find($id);
+			$article = Article::where("draft", 0)->with("tags")->find($id);
 			if(is_null($article)) throw new NecorandumException(NCRD_ERROR_ARTICLE_NOT_FOUND);
 			$layout_variables += ["articles" => [$article], "solely" => TRUE];
 		}
@@ -245,7 +245,7 @@ try
 			$tag = Tag::with("articles")->where("id", "=", $tag_id)->first();
 			if(is_null($tag)) throw new NecorandumException(NCRD_ERROR_ARTICLE_NOT_FOUND);
 			$app = $GLOBALS["config"]["system"]["articles_per_page"];
-			$articles = $tag->articles()->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->with("tags")->get();
+			$articles = $tag->articles()->where("draft", 0)->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->with("tags")->get();
 			if(count($articles) === 0) throw new NecorandumException(NCRD_ERROR_ARTICLE_NOT_FOUND);
 			$layout_variables += ["articles" => $articles, "tag" => $tag, "page" => $page];
 		}
@@ -253,7 +253,7 @@ try
 		{
 			$template = "layout.twig";
 			$app = $GLOBALS["config"]["system"]["articles_per_page"];
-			$articles = Article::with("tags")->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->get();
+			$articles = Article::where("draft", 0)->with("tags")->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->get();
 			if(count($articles) === 0) throw new NecorandumException(NCRD_ERROR_ARTICLE_NOT_FOUND);
 			$layout_variables += ["articles" => $articles];
 		}
