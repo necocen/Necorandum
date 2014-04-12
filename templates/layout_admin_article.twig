@@ -29,6 +29,13 @@
 		<p>
 			<textarea name="article-text" id="article-text" rows="20" cols="50">{{article is defined ? article.text|e : ""}}</textarea>
 		</p>
+		<h2>下書き</h2>
+		<p>
+			記事を下書き状態にします。
+		</p>
+		<p>
+			<input type="checkbox" name="article-draft" id="article-draft" value="1"{{article is defined and article.draft == 1 ? " checked" : "" }}><label for="article-draft">下書きにする</label>
+		</p>
 		<h2>投稿</h2>
 		<p>
 			<input type="submit" value="送信"><input type="reset" value="消去">

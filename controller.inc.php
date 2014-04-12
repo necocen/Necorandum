@@ -10,6 +10,7 @@ function create_article($post)
 		$article = new Article();
 		$article->title = strval(isset($post["article-title"]) ? $post["article-title"] : "");
 		$article->text = strval($post["article-text"]);
+		$article->draft = isset($post["article-draft"]) ? intval($post["article-draft"]) : 0;
 		if(!$article->save()) return FALSE;
 		
 		$tag_ids = tag_ids(isset($post["article-tags"]) ? $post["article-tags"] : "");
@@ -60,7 +61,7 @@ function update_article($post)
 		
 		$article->title = strval(isset($post["article-title"]) ? $post["article-title"] : "");
 		$article->text = strval($post["article-text"]);
-		
+		$article->draft = isset($post["article-draft"]) ? intval($post["article-draft"]) : 0;
 		
 		$tag_ids = tag_ids(isset($post["article-tags"]) ? $post["article-tags"] : "");
 		

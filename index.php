@@ -74,8 +74,14 @@ try
 			if(create_article($_POST))
 			{
 				$redirect_to = "/";
-				$info += ["記事を投稿しました"];
-				// TODO: ほんとうはここで記事ページへ飛ばして201を返すべき？
+				if(isset($_POST["article-draft"]) && intval($_POST["article-draft"]) === 1)
+				{
+					$info += ["下書きを投稿しました"];
+				}
+				else
+				{
+					$info += ["記事を投稿しました"];
+				}
 			}
 			else
 			{
@@ -90,8 +96,17 @@ try
 				$id = intval($_POST["article-id"]);
 				if(update_article($_POST))
 				{
-					$redirect_to = "/" . strval($id);
-					$info += ["記事を更新しました"];
+					if(isset($_POST["article-draft"]) && intval($_POST["article-draft"]) === 1)
+					{
+						// 下書きの場合はトップへ
+						$redirect_to = "/";
+						$info += ["下書きを更新しました"];
+					}
+					else
+					{
+						$redirect_to = "/" . strval($id);
+						$info += ["記事を更新しました"];
+					}
 				}
 				else
 				{
