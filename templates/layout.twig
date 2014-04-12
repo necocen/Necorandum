@@ -59,6 +59,11 @@
 						<a href="./atom" title="Atom feed"><span class="typicons">&#xe803;</span></a>
 						{% if login %}
 						<a href="./admin" title="admin"><span class="typicons">&#xe823;</span></a>
+						{% if solely %}
+						<a href="./admin/edit/{{articles[0].id}}" title="edit"><span class="typicons">&#xe821;</span></a>
+						{% else %}
+						<a href="./admin/new" title="new"><span class="typicons">&#xe821;</span></a>
+						{% endif %}
 						{% endif %}
 						{% include "tags.twig" with {tags: tags} %}
 						{% endif %}
