@@ -4,17 +4,24 @@ function create_article($post)
 {
 	if(!isset($post["token"]) || !check_token($post["token"])) return FALSE;
 	if(!isset($post["article-text"])) return FALSE;
-	
-	$article = new Article();
-	$article->title = strval(isset($post["article-title"]) ? $post["article-title"] : "");
-	$article->text = strval($post["article-text"]);
-	if(!$article->save()) return FALSE;
 
-	$tag_ids = tag_ids(isset($post["article-tags"]) ? $post["article-tags"] : "");
-
-	$article->tags()->attach($tag_ids);
-
-	return $article->save();
+	try
+	{
+		$article = new Article();
+		$article->title = strval(isset($post["article-title"]) ? $post["article-title"] : "");
+		$article->text = strval($post["article-text"]);
+		if(!$article->save()) return FALSE;
+		
+		$tag_ids = tag_ids(isset($post["article-tags"]) ? $post["article-tags"] : "");
+		
+		$article->tags()->attach($tag_ids);
+		
+		return $article->save();
+	}
+	catch(Exception $e)
+	{
+		return FALSE;
+	}
 }
 
 
@@ -44,20 +51,27 @@ function update_article($post)
 	if(!isset($post["token"]) || !check_token($post["token"])) return FALSE;
 	if(!isset($post["article-id"])) return FALSE;
 	if(!isset($post["article-text"])) return FALSE;
-	
-	$article = Article::find(intval($post["article-id"]));
 
-	if(is_null($article)) return FALSE;
-	
-	$article->title = strval(isset($post["article-title"]) ? $post["article-title"] : "");
-	$article->text = strval($post["article-text"]);
-
-
-	$tag_ids = tag_ids(isset($post["article-tags"]) ? $post["article-tags"] : "");
-
-	$article->tags()->sync($tag_ids);
-
-	return $article->save();
+	try
+	{
+		$article = Article::find(intval($post["article-id"]));
+		
+		if(is_null($article)) return FALSE;
+		
+		$article->title = strval(isset($post["article-title"]) ? $post["article-title"] : "");
+		$article->text = strval($post["article-text"]);
+		
+		
+		$tag_ids = tag_ids(isset($post["article-tags"]) ? $post["article-tags"] : "");
+		
+		$article->tags()->sync($tag_ids);
+		
+		return $article->save();
+	}
+	catch(Exception $e)
+	{
+		return FALSE;
+	}
 }
 
 function delete_article($post)
@@ -65,7 +79,14 @@ function delete_article($post)
 	if(!isset($post["token"]) || !check_token($post["token"])) return FALSE;
 	if(!isset($post["article-id"])) return FALSE;
 
-	return Article::destroy(intval($post["article-id"]));
+	try
+	{
+		return Article::destroy(intval($post["article-id"]));
+	}
+	catch(Exception $e)
+	{
+		return FALSE;
+	}
 }
 
 function update_config($post)
