@@ -16,9 +16,11 @@ try
 {
 	$mode = NULL;
 	$admin = FALSE;
+	$error = NULL;
 	$id = 0;
 	$tag_id = 0;
 	$page = 0;
+	if(array_key_exists("error", $_GET)) $error = intval($_GET["error"]);
 	if(array_key_exists("admin", $_GET)) $admin = (intval($_GET["admin"]) === 1);
 	if(array_key_exists("mode", $_GET)) $mode = strtolower($_GET["mode"]);
 	if(array_key_exists("id", $_GET)) $id = intval($_GET["id"]);
@@ -26,10 +28,21 @@ try
 	if(array_key_exists("page", $_GET)) $page = intval($_GET["page"]);
 	
 	$redirect_to = NULL;
-	$error = NULL;
 	$info = [];
 	$warn = [];
 	$mime_type = NULL;
+
+	$layout_variables = [
+		"config" => $GLOBALS["config"],
+		"system" => $GLOBALS["system"],
+		];
+
+	if(!is_null($error))
+	{
+		$layout_variables += ["error" => TRUE, "message" => http_error_message($error), "status_code" => $error];
+		print $GLOBALS["twig"]->render("layout_error.twig", $layout_variables);
+		die();
+	}
 	
 	// クッキーでログイン判定
 	if(array_key_exists("password", $_COOKIE))
@@ -172,14 +185,9 @@ try
 	
 	// 圧縮バッファ
 	ob_start("ob_gzhandler");
-	// twig
-	$layout_variables = [
-		"config" => $GLOBALS["config"],
-		"system" => $GLOBALS["system"],
-		"embed_ga" => TRUE,
-		"login" => isset($_SESSION["login"]) ? $_SESSION["login"] : FALSE,
-		];
-	
+
+	$layout_variables += ["embed_ga" => TRUE, "login" => isset($_SESSION["login"]) ? $_SESSION["login"] : FALSE];
+
 	if($admin) // 管理ページ？
 	{
 		// 未ログインでは$modeがNULLの場合しか来ない
@@ -235,6 +243,7 @@ try
 		{
 			$template = "layout_tag.twig";
 			$tag = Tag::with("articles")->where("id", "=", $tag_id)->first();
+			if(is_null($tag)) throw new NecorandumException(NCRD_ERROR_ARTICLE_NOT_FOUND);
 			$app = $GLOBALS["config"]["system"]["articles_per_page"];
 			$articles = $tag->articles()->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->with("tags")->get();
 			if(count($articles) === 0) throw new NecorandumException(NCRD_ERROR_ARTICLE_NOT_FOUND);
@@ -255,14 +264,15 @@ try
 }
 catch(NecorandumException $e)
 {
-	// TODO: エラーページ
 	http_header($e->getHttpErrorCode());
-	echo $e->getMessage();
+	$layout_variables += ["error" => TRUE, "status_code" => $e->getHttpErrorCode(), "message" => $e->getMessage()];
+	print $GLOBALS["twig"]->render("layout_error.twig", $layout_variables);
 }
 catch(Exception $e)
 {
 	http_header(500);
-	echo "neko";
+	$layout_variables += ["error" => TRUE, "status_code" => 500, "message" => "システム・エラーが発生しました。"];
+	print $GLOBALS["twig"]->render("layout_error.twig", $layout_variables);
 }
 
 

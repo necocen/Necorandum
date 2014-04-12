@@ -52,7 +52,7 @@
 				</div>
 				<div id="menu">
 					<nav class="bound">
-						{% if not admin %}
+						{% if not admin and not error %}
 						<form id="search" action="./" method="GET">
 							<input name="search" type="text"><input type="submit" value="&#xe81d;">
 						</form>

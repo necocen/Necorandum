@@ -1,0 +1,12 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ parent() }} - Error: {{ status_code }}{% endblock %}
+
+{% block contents %}
+<div class="error">
+<h1>{{ status_code }}</h1>
+<p>
+{{ message }}
+</p>
+</div>
+{% endblock %}

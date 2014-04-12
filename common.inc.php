@@ -191,6 +191,22 @@ function http_message($code)
 	}
 }
 
+// HTTP1.1エラー文字列（日本語）
+function http_error_message($code)
+{
+	switch($code)
+	{
+	case 403:
+		return "アクセスが拒否されました。";
+	case 404:
+		return "ファイルが見つかりません。";
+	case 500:
+		return "システム・エラーです。";
+	default:
+		return "不明なエラーです";
+	}
+}
+
 function http_header($code)
 {
 	header(sprintf("HTTP/1.1 %d %s", $code, http_message($code)));
