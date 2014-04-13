@@ -35,6 +35,7 @@ RewriteRule	^admin/new$			?admin=1&mode=new				[L]
 RewriteRule	^admin/edit/([1-9][0-9]*)$		?admin=1&mode=edit&id=$1		[L]
 RewriteRule	^admin/tag/([1-9][0-9]*)$			?admin=1&mode=tag&tagid=$1	[L]
 RewriteRule	^admin/config$	?admin=1&mode=config		[L]
+RewriteRule	^admin/drafts$	?admin=1&mode=drafts		[L]
 
 # そのほかのページ
 RewriteRule	^atom$				?mode=atom							[QSA] # page

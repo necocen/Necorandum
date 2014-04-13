@@ -1,0 +1,19 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ parent() }} - drafts{% endblock %}
+
+{% block contents %}
+<article>
+	<header>
+		<h1>drafts</h1>
+	</header>
+	<p>
+		下書きの一覧です。
+	</p>
+	<ul>
+	{% for draft in drafts %}
+		<li><a href="./admin/edit/{{ draft.id }}" title="{{ draft.title }}">{{ draft.title }}</a></li>
+	{% endfor %}
+	</ul>
+</article>
+{% endblock %}

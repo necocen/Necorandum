@@ -241,6 +241,12 @@ try
 			$layout_variables += ["token" => $token];
 			$template = "layout_admin_config.twig";
 		}
+		else if($mode === "drafts")
+		{
+			$drafts = Article::where("draft", 1)->orderBy("created_at", "desc")->get();
+			$layout_variables += ["drafts" => $drafts];
+			$template = "layout_admin_drafts.twig";
+		}
 	}
 	else
 	{
