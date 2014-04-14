@@ -17,6 +17,7 @@ try
 	$mode = NULL;
 	$admin = FALSE;
 	$error = NULL;
+	$ajax = NULL;
 	$id = 0;
 	$tag_id = 0;
 	$page = 0;
@@ -26,6 +27,9 @@ try
 	if(array_key_exists("id", $_GET)) $id = intval($_GET["id"]);
 	if($id === 0 && array_key_exists("tagid", $_GET)) $tag_id = intval($_GET["tagid"]);
 	if(array_key_exists("page", $_GET)) $page = intval($_GET["page"]);
+
+	// ajax
+	if(array_key_exists("ajax", $_POST)) $ajax = strtolower($_POST["ajax"]);
 	
 	$redirect_to = NULL;
 	$info = [];
@@ -41,6 +45,32 @@ try
 	{
 		$layout_variables += ["error" => TRUE, "message" => http_error_message($error), "status_code" => $error];
 		print $GLOBALS["twig"]->render("layout_error.twig", $layout_variables);
+		die();
+	}
+
+	if(!is_null($ajax))
+	{
+		if($ajax === "preview")
+		{
+			set_backup($_POST);
+			// TODO: プレビュー
+		}
+		else if($ajax === "backup")
+		{
+			set_backup($_POST);
+		}
+		else if($ajax === "restore")
+		{
+			if(array_key_exists("backup", $_SESSION) && !is_null($_SESSION["backup"]))
+			{
+				echo json_encode($_SESSION["backup"]);
+			}
+		}
+		else if($ajax === "delete-backup")
+		{
+			delete_backup();
+		}
+		
 		die();
 	}
 	
@@ -82,11 +112,15 @@ try
 				{
 					$info += ["記事を投稿しました"];
 				}
+				// バックアップ削除
+				delete_backup();
 			}
 			else
 			{
 				$redirect_to = "/admin/new";
 				$warn += ["記事の投稿に失敗しました"];
+				// バックアップ保存
+				set_backup($_POST);
 			}
 		}
 		else if($mode === "update")
@@ -107,11 +141,15 @@ try
 						$redirect_to = "/" . strval($id);
 						$info += ["記事を更新しました"];
 					}
+					// バックアップ削除
+					delete_backup();
 				}
 				else
 				{
 					$redirect_to = "/admin/edit/" . strval($id);
 					$warn += ["記事の更新に失敗しました"];
+					// バックアップ保存
+					set_backup($_POST);
 				}
 			}
 			else if(array_key_exists("tag-id", $_POST))

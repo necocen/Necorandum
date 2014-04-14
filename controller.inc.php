@@ -108,4 +108,20 @@ function update_config($post)
 	return $config->save();
 }
 
+function set_backup($post)
+{
+	if(!isset($post["article-title"])) return FALSE;
+	if(!isset($post["article-tags"])) return FALSE;
+	if(!isset($post["article-text"])) return FALSE;
+
+	$_SESSION["backup"] = ["title" => $post["article-title"],
+												 "tags" => $post["article-tags"],
+												 "text" => $post["article-text"]];
+}
+
+function delete_backup()
+{
+	$_SESSION["backup"] = NULL;
+}
+
 ?>
