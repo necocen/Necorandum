@@ -38,7 +38,7 @@
 		</p>
 		<h2>投稿</h2>
 		<p>
-			<input type="submit" value="送信"><input type="reset" value="消去">
+			<input type="submit" value="送信"><input type="reset" value="消去"><input type="button" value="プレビュー" onClick="sendEditingText(true);">
 			<input type="hidden" name="token" id="token" value="{{token}}">
 			{% if article is defined %}
 			<input type="hidden" name="article-id" id="article-id" value="{{article.id}}">

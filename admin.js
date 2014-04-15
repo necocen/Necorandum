@@ -1,10 +1,16 @@
+var sendEditingText;
+
 (function(){
 
 	/// [リストア]を表示する<li>要素
 	var restoreLabel = null;
 	
 	/// 入力内容を送りつける
-	function sendEditingText(preview) {
+	function _sendEditingText(preview) {
+		if(preview && $("article#preview").length === 0)
+		{
+			$("div#main").append($("<article id=\"preview\"></article>"));
+		}
 		$.ajax({
 		type: "POST",
 		url: "./",
@@ -15,10 +21,23 @@
 			"article-text": $("textarea#article-text").val()},
 		dataType: "html",
 		success: function(data, status, xhr) {
-			// 必要ならここで
+			if(preview)
+			{
+				var article = $(data);
+				$("article#preview").html(article.html());
+				$("article#preview pre code").each(function() {
+		$(this).html(hljs.highlight($(this).attr("class").substring(9), $(this).html()).value);
+		$(this).addClass("hljs");
+	});
+			}
+		},
+		error: function(xhr, errorType, error) {
+			$("article#preview").html("<p>プレビューの生成に失敗しました</p>");
 		}
 		});
 	};
+
+	sendEditingText = _sendEditingText;
 
 	function deleteBackup() {
 		$.ajax({
@@ -91,7 +110,7 @@
 						 articleTags !== newArticleTags ||
 						 articleText !== newArticleText)
 					{
-						sendEditingText(false);
+						_sendEditingText(false);
 						cleanUpRestoreLabel();
 					}
 					articleTitle = newArticleTitle;

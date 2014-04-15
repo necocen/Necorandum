@@ -53,7 +53,11 @@ try
 		if($ajax === "preview")
 		{
 			set_backup($_POST);
-			// TODO: プレビュー
+			$article = new Article();
+			$article->title = $_SESSION["backup"]["title"];
+			$article->text = $_SESSION["backup"]["text"];
+			$tags = array_map("trim", explode(",", $_SESSION["backup"]["tags"]));
+			print $GLOBALS["twig"]->render("article.twig", ["preview" => TRUE, "article" => $article, "tags" => $tags]);
 		}
 		else if($ajax === "backup")
 		{
@@ -330,7 +334,8 @@ catch(NecorandumException $e)
 catch(Exception $e)
 {
 	http_header(500);
-	$layout_variables += ["error" => TRUE, "status_code" => 500, "message" => "システム・エラーが発生しました。"];
+//	$layout_variables += ["error" => TRUE, "status_code" => 500, "message" => "システム・エラーが発生しました。"];
+		$layout_variables += ["error" => TRUE, "status_code" => 500, "message" => $e->getMessage()];
 	print $GLOBALS["twig"]->render("layout_error.twig", $layout_variables);
 }
 
