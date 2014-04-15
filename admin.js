@@ -25,10 +25,11 @@ var sendEditingText;
 			{
 				var article = $(data);
 				$("article#preview").html(article.html());
+				// ハイライト
 				$("article#preview pre code").each(function() {
-		$(this).html(hljs.highlight($(this).attr("class").substring(9), $(this).html()).value);
-		$(this).addClass("hljs");
-	});
+					$(this).html(hljs.highlight($(this).attr("class").substring(9), $(this).html()).value);
+					$(this).addClass("hljs");
+				});
 			}
 		},
 		error: function(xhr, errorType, error) {
