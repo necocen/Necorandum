@@ -34,7 +34,6 @@ try
 	$redirect_to = NULL;
 	$info = [];
 	$warn = [];
-	$mime_type = NULL;
 
 	$layout_variables = [
 		"config" => $GLOBALS["config"],
@@ -44,6 +43,10 @@ try
 	if(!is_null($error))
 	{
 		$layout_variables += ["error" => TRUE, "message" => http_error_message($error), "status_code" => $error];
+		header("Content-Type: text/html; charset=utf-8");
+		header("Content-Script-Type: text/javascript");
+		header("Content-Style-Type: text/css");
+		
 		print $GLOBALS["twig"]->render("layout_error.twig", $layout_variables);
 		die();
 	}
@@ -57,6 +60,7 @@ try
 			$article->title = $_SESSION["backup"]["title"];
 			$article->text = $_SESSION["backup"]["text"];
 			$tags = array_map("trim", explode(",", $_SESSION["backup"]["tags"]));
+			header("Content-Type: text/html; charset=utf-8");
 			print $GLOBALS["twig"]->render("article.twig", ["preview" => TRUE, "article" => $article, "tags" => $tags]);
 		}
 		else if($ajax === "backup")
@@ -67,6 +71,7 @@ try
 		{
 			if(array_key_exists("backup", $_SESSION) && !is_null($_SESSION["backup"]))
 			{
+				header("Content-Type: application/json; charset=utf-8");
 				echo json_encode($_SESSION["backup"]);
 			}
 		}
@@ -232,7 +237,7 @@ try
 		$_SESSION["warn"] = $warn;
 		header("Location: " . $redirect_to);
 		finalize();
-		die("Redirect");
+		die();
 	}
 	
 	if(isset($_SESSION["info"]) && is_array($_SESSION["info"])) $info = $_SESSION["info"];
@@ -242,6 +247,10 @@ try
 	
 	// 圧縮バッファ
 	ob_start("ob_gzhandler");
+
+	header("Content-Type: text/html; charset=utf-8");
+	header("Content-Script-Type: text/javascript");
+	header("Content-Style-Type: text/css");
 
 	$layout_variables += ["embed_ga" => TRUE, "login" => isset($_SESSION["login"]) ? $_SESSION["login"] : FALSE];
 
@@ -345,14 +354,6 @@ catch(Exception $e)
 		$layout_variables += ["error" => TRUE, "status_code" => 500, "message" => $e->getMessage()];
 	print $GLOBALS["twig"]->render("layout_error.twig", $layout_variables);
 }
-
-
-// TODO: この子たち
-// MIMEタイプヘッダ出力
-if(is_null($mime_type)) $mime_type = "text/html";
-header(sprintf("Content-Type: %s; charset=utf-8", $mime_type));
-header("Content-Script-Type: text/javascript");
-header("Content-Style-Type: text/css");
 
 finalize();
 
