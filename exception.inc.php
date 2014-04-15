@@ -5,13 +5,14 @@ set_error_handler(function($errno, $errstr, $errfile, $errline) {
 	throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 });
 
-define("NCRD_ERROR_ARTICLE_NOT_FOUND", 1);
-define("NCRD_ERROR_SESSION_NOT_START", 2);
-define("NCRD_ERROR_TOKEN_NOT_GENERATED", 3);
-define("NCRD_ERROR_FUNCTION_NOT_IMPLEMENTED", 4);
 
 class NecorandumException extends Exception
 {
+	const ArticleNotFound = 1;
+	const SessionNotStarted = 2;
+	const TokenNotGenerated = 3;
+	const FunctionNotImplemented = 4;
+	
 	protected $httpErrorCode;
 	
 	public function __construct($code)
@@ -23,13 +24,13 @@ class NecorandumException extends Exception
 	{
 		switch($code)
 		{
-		case NCRD_ERROR_ARTICLE_NOT_FOUND:
+		case self::ArticleNotFound:
 			return "記事が見つかりません。";
-		case NCRD_ERROR_SESSION_NOT_START:
+		case self::SessionNotStarted:
 			return "セッションの開始に失敗しました。";
-		case NCRD_ERROR_TOKEN_NOT_GENERATED:
+		case self::TokenNotGenerated:
 			return "トークンの生成に失敗しました。";
-		case NCRD_ERROR_FUNCTION_NOT_IMPLEMENTED:
+		case self::FunctionNotImplemented:
 			return "まだ実装されていない機能です。";
 		default:
 			return "不明なエラーです。";
@@ -40,14 +41,10 @@ class NecorandumException extends Exception
 	{
 		switch($this->code)
 		{
-		case NCRD_ERROR_ARTICLE_NOT_FOUND:
+		case self::ArticleNotFound:
 			return 404;
-		case NCRD_ERROR_SESSION_NOT_START:
-		case NCRD_ERROR_TOKEN_NOT_GENERATED:
-		case NCRD_ERROR_FUNCTION_NOT_IMPLEMENTED:
-			return 500;
 		default:
-			return 404;
+			return 500;
 		}
 	}
 }

@@ -275,7 +275,7 @@ try
 		else if($mode === "tag" && $tag_id != 0)
 		{
 			// TODO: タグの編集
-			throw new NecorandumException(NCRD_ERROR_FUNCTION_NOT_IMPLEMENTED);
+			throw new NecorandumException(NecorandumException::FunctionNotImplemented);
 		}
 		else if($mode === "config")
 		{
@@ -299,17 +299,17 @@ try
 			// 記事単体ページのレイアウトはちょっと変える可能性がある
 			$template = "layout_article.twig";
 			$article = Article::where("draft", 0)->with("tags")->find($id);
-			if(is_null($article)) throw new NecorandumException(NCRD_ERROR_ARTICLE_NOT_FOUND);
+			if(is_null($article)) throw new NecorandumException(NecorandumException::ArticleNotFound);
 			$layout_variables += ["articles" => [$article], "solely" => TRUE];
 		}
 		else if($tag_id != 0)
 		{
 			$template = "layout_tag.twig";
 			$tag = Tag::with("articles")->where("id", "=", $tag_id)->first();
-			if(is_null($tag)) throw new NecorandumException(NCRD_ERROR_ARTICLE_NOT_FOUND);
+			if(is_null($tag)) throw new NecorandumException(NecorandumException::ArticleNotFound);
 			$app = $GLOBALS["config"]["system"]["articles_per_page"];
 			$articles = $tag->articles()->where("draft", 0)->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->with("tags")->get();
-			if(count($articles) === 0) throw new NecorandumException(NCRD_ERROR_ARTICLE_NOT_FOUND);
+			if(count($articles) === 0) throw new NecorandumException(NecorandumException::ArticleNotFound);
 			$layout_variables += ["articles" => $articles, "tag" => $tag, "page" => $page];
 		}
 		else
@@ -317,7 +317,7 @@ try
 			$template = "layout.twig";
 			$app = $GLOBALS["config"]["system"]["articles_per_page"];
 			$articles = Article::where("draft", 0)->with("tags")->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->get();
-			if(count($articles) === 0) throw new NecorandumException(NCRD_ERROR_ARTICLE_NOT_FOUND);
+			if(count($articles) === 0) throw new NecorandumException(NecorandumException::ArticleNotFound);
 			$layout_variables += ["articles" => $articles];
 		}
 	}
