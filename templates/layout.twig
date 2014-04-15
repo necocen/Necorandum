@@ -15,6 +15,11 @@
 //<![CDATA[
 	hljs.configure({tabReplace: "    "});
 	hljs.initHighlightingOnLoad();
+	if(window.addEventListener) {
+		var NodeInsert = function(evt) { Array.prototype.forEach.call(evt.target.querySelectorAll('pre code'), hljs.highlightBlock);};
+		window.addEventListener('AutoPagerize_DOMNodeInserted', NodeInsert, false);
+		window.addEventListener('AutoPatchWork.DOMNodeInserted', NodeInsert, false);
+	}
 //]]></script>
 		<script type="text/javascript" src="./zepto.min.js"></script>
 {% if admin and login %}
@@ -86,7 +91,7 @@
 				</aside>
 				{% endif%}
 				{% block contents %}
-				<div>
+				<div class="autopagerize_page_element">
 					{% for article in articles %}
 						{% include "article.twig" with {article: article} %}
 						{% if not loop.last %}
@@ -101,7 +106,7 @@
 						<li><a href="{{ prev }}" title="前のページ">prev</a></li>
 					{% endif %}
 					{% if next is defined %}
-						<li><a href="{{ next }}" title="次のページ">next</a></li>
+						<li><a href="{{ next }}" title="次のページ" rel="next">next</a></li>
 					{% endif %}
 					</ul>
 				</nav>

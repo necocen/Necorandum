@@ -291,7 +291,7 @@ aside.timestamps:before
 
 
 h1 {font-family: "Hiragino Mincho ProN W3", YuMincho, "游明朝", "MS Mincho", Meiryo;}
-.tags, nav#prev-next, aside.timestamps, address {font-family: Georgia, "Hiragino Mincho ProN W3", YuMincho, "游明朝", Meiryo, serif;}
+.tags, nav#prev-next, aside.timestamps, address, p.autopagerize_page_info {font-family: Georgia, "Hiragino Mincho ProN W3", YuMincho, "游明朝", Meiryo, serif;}
 code {font-family: Ricty, Consolas, Monaco, "Courier New", monospace;}
 
 
@@ -410,5 +410,10 @@ div.error p
 {
 	margin-bottom: 100px;
 	font-size: small;
+	text-align: center;
+}
+
+p.autopagerize_page_info
+{
 	text-align: center;
 }
