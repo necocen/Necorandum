@@ -20,13 +20,13 @@ try
 	$ajax = NULL;
 	$id = 0;
 	$tag_id = 0;
-	$page = 0;
+	$page = 1;
 	if(array_key_exists("error", $_GET)) $error = intval($_GET["error"]);
 	if(array_key_exists("admin", $_GET)) $admin = (intval($_GET["admin"]) === 1);
 	if(array_key_exists("mode", $_GET)) $mode = strtolower($_GET["mode"]);
 	if(array_key_exists("id", $_GET)) $id = intval($_GET["id"]);
 	if($id === 0 && array_key_exists("tagid", $_GET)) $tag_id = intval($_GET["tagid"]);
-	if(array_key_exists("page", $_GET)) $page = intval($_GET["page"]);
+	if(array_key_exists("page", $_GET)) $page = max(1, intval($_GET["page"]));
 
 	// ajax
 	if(array_key_exists("ajax", $_POST)) $ajax = strtolower($_POST["ajax"]);
@@ -308,7 +308,11 @@ try
 			$tag = Tag::with("articles")->where("id", "=", $tag_id)->first();
 			if(is_null($tag)) throw new NecorandumException(NecorandumException::ArticleNotFound);
 			$app = $GLOBALS["config"]["system"]["articles_per_page"];
-			$articles = $tag->articles()->where("draft", 0)->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->with("tags")->get();
+			$articles = $tag->articles()->where("draft", 0)->orderBy("created_at", "desc")->take($app)->skip(($page - 1) * $app)->with("tags")->get();
+
+			$count = $tag->articles()->where("draft", 0)->count();
+			$layout_variables += paginator($count, $page, sprintf("/tag/%d", $tag_id));
+			
 			if(count($articles) === 0) throw new NecorandumException(NecorandumException::ArticleNotFound);
 			$layout_variables += ["articles" => $articles, "tag" => $tag, "page" => $page];
 		}
@@ -316,7 +320,10 @@ try
 		{
 			$template = "layout.twig";
 			$app = $GLOBALS["config"]["system"]["articles_per_page"];
-			$articles = Article::where("draft", 0)->with("tags")->orderBy("created_at", "desc")->take($app)->skip(($page > 0 ? ($page - 1) : 0) * $app)->get();
+			$articles = Article::where("draft", 0)->with("tags")->orderBy("created_at", "desc")->take($app)->skip(($page - 1) * $app)->get();
+
+			$count = Article::where("draft", 0)->count();
+			$layout_variables += paginator($count, $page);
 			if(count($articles) === 0) throw new NecorandumException(NecorandumException::ArticleNotFound);
 			$layout_variables += ["articles" => $articles];
 		}

@@ -171,6 +171,43 @@ function gc_token()
 	}
 }
 
+// ペジネイション
+// prev/nextの配列を返します。
+function paginator($count, $page, $base = "/")
+{
+	$array = [];
+	if($page > 1)
+	{
+		if($page === 2)
+		{
+			// to first page
+			$array += ["prev" => $base];
+		}
+		else
+		{
+			$array += ["prev" => addQueryParam($base, "page", strval($page - 1))];
+		}
+	}
+	if($GLOBALS["config"]["system"]["articles_per_page"] * $page < $count)
+	{
+		$array += ["next" => addQueryParam($base, "page", strval($page + 1))];
+	}
+	return $array;
+}
+
+// URL末尾にパラメータをくっつけます
+function addQueryParam($base, $name, $value)
+{
+	if(strpos("?", $base) === false)
+	{
+		return sprintf("%s?%s=%s", $base, $name, $value);
+	}
+	else
+	{
+		return sprintf("%s&%s=%s", $base, $name, $value);
+	}
+}
+
 // ハッシュ
 function blowfish($string)
 {

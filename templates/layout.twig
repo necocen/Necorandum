@@ -94,11 +94,15 @@
 						{% endif %}
 					{% endfor %}
 				</div>
-				{% if not solely %}
+				{% if prev is defined or next is defined %}
 				<nav id="prev-next">
 					<ul>
-						<li>prev</li>
-						<li>next</li>
+					{% if prev is defined %}
+						<li><a href="{{ prev }}" title="前のページ">prev</a></li>
+					{% endif %}
+					{% if next is defined %}
+						<li><a href="{{ next }}" title="次のページ">next</a></li>
+					{% endif %}
 					</ul>
 				</nav>
 				{% endif %}

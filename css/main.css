@@ -170,10 +170,15 @@ nav#prev-next ul li
 {
 	display: inline-block;
 }
-nav#prev-next ul li:first-child:after
+nav#prev-next ul li:last-child:before
 {
 	content: " /";
-	margin: 0 1em;
+	margin: 0 1em 0 0.8em;
+}
+nav#prev-next ul li:first-child:before
+{
+	content: "";
+	margin: 0;
 }
 
 footer
@@ -284,11 +289,6 @@ aside.timestamps:before
 	margin-right: 0.1em;
 }
 
-/*aside.timestamps {float: left;}*/
-
-/*aside.tags {text-align:right;}*/
-
-/*aside.tags:after {clear:both;}*/
 
 h1 {font-family: "Hiragino Mincho ProN W3", YuMincho, "游明朝", "MS Mincho", Meiryo;}
 .tags, nav#prev-next, aside.timestamps, address {font-family: Georgia, "Hiragino Mincho ProN W3", YuMincho, "游明朝", Meiryo, serif;}
