@@ -12,7 +12,7 @@
 	<aside class="tags">
 	{% if article.tags is not empty and preview is not defined %}
 	{% include "tags.twig" with {tags: article.tags} %}
-	{% elseif tags is not empty %}
+	{% elseif tags is not empty and preview is defined %}
 	<ul class="tags">
 	{% for tag in tags %}
 		<li>{{tag|e}}</li>
