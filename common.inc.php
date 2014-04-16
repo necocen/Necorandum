@@ -24,8 +24,14 @@ function init_necorandum()
 		
 		// twig(debug)
 		$twig_loader = new Twig_Loader_Filesystem("./templates");
-		$twig = new Twig_Environment($twig_loader, ["cache" => FALSE, "debug" => TRUE]);
-		$twig->addExtension(new Twig_Extension_Debug());
+		$twig_option = [];
+		$twig_option["cache"] = ($GLOBALS["config"]["system"]["twig_cache"]) ? "./cache" : FALSE;
+		$twig_option["debug"] = $GLOBALS["config"]["system"]["twig_debug"];
+		$twig = new Twig_Environment($twig_loader, $twig_option);
+		if($GLOBALS["config"]["system"]["twig_debug"])
+		{
+			$twig->addExtension(new Twig_Extension_Debug());
+		}
 		
 		// Parsedown or PHP Markdown+Extra
 		if($use_parsedown)
