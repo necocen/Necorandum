@@ -82,6 +82,17 @@ try
 		
 		die();
 	}
+
+	if($mode === "atom")
+	{
+		header("Content-Type: application/atom+xml; type=feed; charset=utf-8");
+		$apf = $GLOBALS["config"]["system"]["articles_per_feed"];
+		$articles = Article::where("draft", 0)->orderBy("created_at", "desc")->take($apf)->skip(($page - 1) * $apf)->get();
+		$updated = new DateTime(Article::max("updated_at"));
+		$layout_variables += ["articles" => $articles, "updated" => $updated];
+		print $GLOBALS["twig"]->render("atom.twig", $layout_variables);
+		die();
+	}
 	
 	// クッキーでログイン判定
 	if(array_key_exists("password", $_COOKIE))

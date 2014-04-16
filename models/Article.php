@@ -15,6 +15,11 @@ class Article extends \LaravelBook\Ardent\Ardent
 	{
 		return implode(",", array_map(function ($tag) { return $tag->name; }, $this->tags->all()));
 	}
+
+	function permalink()
+	{
+		return "http://" . $GLOBALS["system"]["base"] . "/" . sprintf("%d", $this->id);
+	}
 }
 
 ?>

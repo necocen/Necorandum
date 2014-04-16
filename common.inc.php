@@ -57,6 +57,12 @@ function init_necorandum()
 		});
 		
 		$twig->addFilter($parsedown_filter);
+
+		// Atom用Markdownフィルタ
+		$atom_filter = new Twig_SimpleFilter("atom", function ($string) use($parser) {
+			return $parser->parse($string);
+		});
+		$twig->addFilter($atom_filter);
 		
 		$twig->getExtension("core")->setDateFormat("Y-m-d H:i:s", "%d days");
 		$GLOBALS["twig"] = $twig;
