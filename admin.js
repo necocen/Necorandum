@@ -99,6 +99,11 @@ var sendEditingText;
 		
 		if($("input#article-title").length > 0) // 記事編集画面のみ
 		{
+			// tabOverride
+			tabOverride.set($("textarea#article-text"));
+			tabOverride.autoIndent(true);
+
+			// backup
 			setInterval(function(){
 				var articleTitle = $("input#article-title").val();
 				var articleTags = $("input#article-tags").val();

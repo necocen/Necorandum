@@ -9,8 +9,8 @@
 		<meta name="reply-to" content="{{config.site.email}}">
 		<base href="http://{{system.base}}/">
 		<link rel="stylesheet" href="./css/main.css" type="text/css" media="screen">
-		<link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/{{config.site.highlight_theme}}.min.css" media="screen">
-		<script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/{{config.site.highlight_theme}}.min.css" media="screen">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
 		<script>
 //<![CDATA[
 	hljs.configure({tabReplace: "    "});
@@ -21,19 +21,13 @@
 		window.addEventListener('AutoPatchWork.DOMNodeInserted', NodeInsert, false);
 	}
 //]]></script>
-		<script type="text/javascript" src="./zepto.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+		<script type="text/javascript" src="./main.js"></script>
 {% if admin and login %}
 		<script type="text/javascript" src="./taboverride.min.js"></script>
 		<script>
-//<![CDATA[
-	$(document).ready(function() {
-		tabOverride.set($("textarea"));
-		tabOverride.autoIndent(true);
-	});
-//]]></script>
 		<script type="text/javascript" src="./admin.js"></script>
 {% endif %}
-		<script type="text/javascript" src="./main.js"></script>
 {% if embed_ga %}
 		<script type="text/javascript">
 //<![CDATA[
