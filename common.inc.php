@@ -9,7 +9,6 @@ function init_necorandum()
 		// set timezone
 		date_default_timezone_set("Asia/Tokyo");
 		
-		$use_parsedown = TRUE;
 		
 		// Ardent
 		\LaravelBook\Ardent\Ardent::configureAsExternal([
@@ -34,28 +33,14 @@ function init_necorandum()
 		}
 		
 		// Parsedown or PHP Markdown+Extra
-		if($use_parsedown)
-		{
-			$parser = new Parsedown();
-			$parser->setBreaksEnabled(TRUE);
-		}
-		else
-		{
-			$parser = new Michelf\MarkdownExtra;
-		}
+		$parser = new Parsedown();
+		$parser->setBreaksEnabled(TRUE);
 		
 		// markdown+α フィルタ
-		$parsedown_filter = new Twig_SimpleFilter("markdown", function ($string) use($parser, $use_parsedown) {
+		$parsedown_filter = new Twig_SimpleFilter("markdown", function ($string) use($parser) {
 			
 			// parsedown
-			if($use_parsedown)
-			{
-				$string = $parser->parse($string);
-			}
-			else
-			{
-				$string = $parser->transform($string);
-			}
+			$string = $parser->parse($string);
 			
 			// 見出しレベルの調整
 			$string = str_replace("<h3>", "<h4>", $string);
@@ -66,10 +51,7 @@ function init_necorandum()
 			$string = str_replace("</h1>", "</h2>", $string);
 			
 			// XHTMLではpreタグの先頭改行が表示されてしまうので消す(Parsedownのみ)
-			if($use_parsedown)
-			{
-				$string = str_replace("\n</pre>", "</pre>", str_replace("<pre>\n", "<pre>", $string));
-			}
+			$string = str_replace("\n</pre>", "</pre>", str_replace("<pre>\n", "<pre>", $string));
 			
 			return $string;
 		});
