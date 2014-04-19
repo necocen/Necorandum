@@ -342,9 +342,9 @@ try
 		{
 			$template = "layout.twig";
 			$app = $GLOBALS["config"]["system"]["articles_per_page"];
-			$where = Article::where("draft", 0)->whereRaw("MATCH(title, text) AGAINST(? IN BOOLEAN MODE)", array('"' . $search . '"'));
+			$where = Article::where("draft", 0)->whereRaw("MATCH(title, text) AGAINST(? IN BOOLEAN MODE)", array(escapegroonga($search)));
 			$count = $where->count();
-			$articles = $where->with("tags")->orderByRaw("MATCH(title, text) AGAINST(? IN BOOLEAN MODE) DESC", array('"' . $search . '"'))->take($app)->skip(($page - 1) * $app)->get();
+			$articles = $where->with("tags")->orderByRaw("MATCH(title, text) AGAINST(? IN BOOLEAN MODE) DESC", array(escapegroonga($search)))->take($app)->skip(($page - 1) * $app)->get();
 			$layout_variables += paginator($count, $page);
 			$layout_variables += ["articles" => $articles, "search" => $search];
 		}

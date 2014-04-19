@@ -243,6 +243,25 @@ function http_header($code)
 	header(sprintf("HTTP/1.1 %d %s", $code, http_message($code)));
 }
 
+// groongaでの検索用にエスケープします
+function escapegroonga($string)
+{
+	$return = "";
+	for($i = 0; $i < strlen($string); $i++)
+	{
+		$char = $string[$i];
+		if(in_array($char, [" ", "\"", "'", "(", ")", "\\"]))
+		{
+			$return .= ("\\" . $char);
+		}
+		else
+		{
+			$return .= $char;
+		}
+	}
+	return $return;
+}
+
 class MySQLSessionHandler implements SessionHandlerInterface
 {
 	public function open($save_path, $name)
