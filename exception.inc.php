@@ -12,6 +12,7 @@ class NecorandumException extends Exception
 	const SessionNotStarted = 2;
 	const TokenNotGenerated = 3;
 	const FunctionNotImplemented = 4;
+	const SearchNotFound = 1;
 	
 	protected $httpErrorCode;
 	
@@ -26,6 +27,8 @@ class NecorandumException extends Exception
 		{
 		case self::ArticleNotFound:
 			return "記事が見つかりません。";
+		case self::SearchNotFound:
+			return "検索結果に合致する記事はありません。";
 		case self::SessionNotStarted:
 			return "セッションの開始に失敗しました。";
 		case self::TokenNotGenerated:
@@ -42,6 +45,7 @@ class NecorandumException extends Exception
 		switch($this->code)
 		{
 		case self::ArticleNotFound:
+		case self::SearchNotFound:
 			return 404;
 		default:
 			return 500;
