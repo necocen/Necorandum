@@ -44,7 +44,7 @@ try
 
 	if(!is_null($error))
 	{
-		$layout_variables += ["error" => TRUE, "message" => http_error_message($error), "search" => $search, "status_code" => $error];
+		$layout_variables += ["error" => TRUE, "message" => http_error_message($error), "status_code" => $error];
 		header("Content-Type: text/html; charset=utf-8");
 		header("Content-Script-Type: text/javascript");
 		header("Content-Style-Type: text/css");
@@ -341,13 +341,14 @@ try
 		else if(strlen($search) > 0)
 		{
 			$template = "layout.twig";
+			$layout_variables += ["search" => $search];
 			$app = $GLOBALS["config"]["system"]["articles_per_page"];
 			$where = Article::where("draft", 0)->whereRaw("MATCH(title, text) AGAINST(? IN BOOLEAN MODE)", array(escapegroonga($search)));
 			$count = $where->count();
 			if($count === 0) throw new NecorandumException(NecorandumException::SearchNotFound);
 			$articles = $where->with("tags")->orderByRaw("MATCH(title, text) AGAINST(? IN BOOLEAN MODE) DESC", array(escapegroonga($search)))->take($app)->skip(($page - 1) * $app)->get();
 			$layout_variables += paginator($count, $page);
-			$layout_variables += ["articles" => $articles, "search" => $search];
+			$layout_variables += ["articles" => $articles];
 		}
 		else
 		{
