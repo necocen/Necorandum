@@ -21,12 +21,14 @@ try
 	$id = 0;
 	$tag_id = 0;
 	$page = 1;
+	$search = NULL;
 	if(array_key_exists("error", $_GET)) $error = intval($_GET["error"]);
 	if(array_key_exists("admin", $_GET)) $admin = (intval($_GET["admin"]) === 1);
 	if(array_key_exists("mode", $_GET)) $mode = strtolower($_GET["mode"]);
 	if(array_key_exists("id", $_GET)) $id = intval($_GET["id"]);
 	if($id === 0 && array_key_exists("tagid", $_GET)) $tag_id = intval($_GET["tagid"]);
 	if(array_key_exists("page", $_GET)) $page = max(1, intval($_GET["page"]));
+	if(array_key_exists("search", $_GET)) $search = strval($_GET["search"]);
 
 	// ajax
 	if(array_key_exists("ajax", $_POST)) $ajax = strtolower($_POST["ajax"]);
@@ -335,6 +337,16 @@ try
 			
 			if(count($articles) === 0) throw new NecorandumException(NecorandumException::ArticleNotFound);
 			$layout_variables += ["articles" => $articles, "tag" => $tag, "page" => $page];
+		}
+		else if(strlen($search) > 0)
+		{
+			$template = "layout.twig";
+			$app = $GLOBALS["config"]["system"]["articles_per_page"];
+			$where = Article::where("draft", 0)->whereRaw('MATCH(title, text) AGAINST(? IN BOOLEAN MODE)', array($search))->with("tags")->orderByRaw('MATCH(title, text) AGAINST(? IN BOOLEAN MODE) DESC', array($search));
+			$count = $where->count();
+			$articles = $where->take($app)->skip(($page - 1) * $app)->get();
+			$layout_variables += paginator($count, $page);
+			$layout_variables += ["articles" => $articles];
 		}
 		else
 		{
