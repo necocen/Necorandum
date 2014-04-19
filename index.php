@@ -44,7 +44,7 @@ try
 
 	if(!is_null($error))
 	{
-		$layout_variables += ["error" => TRUE, "message" => http_error_message($error), "status_code" => $error];
+		$layout_variables += ["error" => TRUE, "message" => http_error_message($error), "search" => $search, "status_code" => $error];
 		header("Content-Type: text/html; charset=utf-8");
 		header("Content-Script-Type: text/javascript");
 		header("Content-Style-Type: text/css");
