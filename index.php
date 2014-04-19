@@ -374,8 +374,16 @@ catch(NecorandumException $e)
 catch(Exception $e)
 {
 	http_header(500);
-//	$layout_variables += ["error" => TRUE, "status_code" => 500, "message" => "システム・エラーが発生しました。"];
-		$layout_variables += ["error" => TRUE, "status_code" => 500, "message" => $e->getMessage()];
+	
+	$layout_variables += ["error" => TRUE, "status_code" => 500];
+	if($GLOBALS["config"]["system"]["debug"])
+	{
+		$layout_variables += ["message" => $e->getMessage()];
+	}
+	else
+	{
+		$layout_variables += ["message" => "システム・エラーが発生しました。"];
+	}
 	print $GLOBALS["twig"]->render("layout_error.twig", $layout_variables);
 }
 

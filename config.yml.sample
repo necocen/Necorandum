@@ -11,6 +11,7 @@ system:
   cookie_expire_date: 7
   twig_cache: false
   twig_debug: false
+  debug: false
 site:
   title: "nekonekko"
   description: "個人的な技術めもです。"
