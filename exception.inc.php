@@ -12,7 +12,7 @@ class NecorandumException extends Exception
 	const SessionNotStarted = 2;
 	const TokenNotGenerated = 3;
 	const FunctionNotImplemented = 4;
-	const SearchNotFound = 1;
+	const SearchNotFound = 5;
 	
 	protected $httpErrorCode;
 	
