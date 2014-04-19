@@ -346,7 +346,7 @@ try
 			$count = $where->count();
 			$articles = $where->take($app)->skip(($page - 1) * $app)->get();
 			$layout_variables += paginator($count, $page);
-			$layout_variables += ["articles" => $articles];
+			$layout_variables += ["articles" => $articles, "search" => $search];
 		}
 		else
 		{
