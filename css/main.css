@@ -360,6 +360,11 @@ form#search > input[type=submit]
 	cursor: pointer;
 }
 
+form#search > input[type=submit]:hover
+{
+	color: #666;
+}
+
 address
 {
 	position: relative;
