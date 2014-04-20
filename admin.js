@@ -26,9 +26,8 @@ var sendEditingText;
 				var article = $(data);
 				$("article#preview").html(article.html());
 				// ハイライト
-				$("article#preview pre code").each(function() {
-					$(this).html(hljs.highlight($(this).attr("class").substring(9), $(this).html()).value);
-					$(this).addClass("hljs");
+				$("article#preview pre code").each(function(i, e) {
+					hljs.highlightBlock(e);
 				});
 			}
 		},
