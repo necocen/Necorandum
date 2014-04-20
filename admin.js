@@ -83,7 +83,7 @@ var sendEditingText;
 	function cleanUpRestoreLabel()
 	{
 		if(restoreLabel === null) return;
-		if(restoreLabel.siblings.length === 1)
+		if(restoreLabel.siblings().length === 0)
 		{
 			restoreLabel.parent().parent().remove();
 		}
