@@ -16,6 +16,7 @@
 		<script>
 //<![CDATA[
 	hljs.configure({tabReplace: "    "});
+	hljs.registerLanguage("text", function(){return {};});
 	hljs.initHighlightingOnLoad();
 	if(window.addEventListener) {
 		var NodeInsert = function(evt) { Array.prototype.forEach.call(evt.target.querySelectorAll('pre code'), hljs.highlightBlock);};
