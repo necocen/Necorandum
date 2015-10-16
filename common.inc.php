@@ -74,11 +74,11 @@ function init_necorandum()
 		if(isset($path_info["dirname"]))
 			$dir_name = $path_info["dirname"];
 		if($dir_name !== "/" && $dir_name !== "\\")
-			$GLOBALS["system"]["base"] =  $_SERVER["SERVER_NAME"] . $dir_name;
+			$GLOBALS["system"]["base"] =  $_SERVER["HTTP_HOST"] . $dir_name;
 		else
-			$GLOBALS["system"]["base"] =  $_SERVER["SERVER_NAME"];
-		$GLOBALS["system"]["host"] = $_SERVER["SERVER_NAME"];
 		
+			$GLOBALS["system"]["base"] =  $_SERVER["HTTP_HOST"];
+		$GLOBALS["system"]["host"] = $_SERVER["HTTP_HOST"];
 		$password = NULL;
 		if(array_key_exists("admin", $GLOBALS["config"]) && array_key_exists("password", $GLOBALS["config"]["admin"]))
 			$password = strval($GLOBALS["config"]["admin"]["password"]);
