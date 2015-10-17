@@ -117,6 +117,7 @@ function init_necorandum()
 	}
 	catch(Exception $e)
 	{
+		error_log($e, 3);
 		return FALSE;
 	}
 }
