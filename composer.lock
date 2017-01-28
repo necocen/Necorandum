@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "4784f1c2aa2e2b145730a68d35d375b9",
+    "content-hash": "c9b5cb2df6434d63cd2dc90a4618c605",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -11,13 +12,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "60819541858f9da6fcb77e8bd09693635553d3ef"
+                "reference": "4b6493999acfa7792efa3cb252d90168e6f266b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/60819541858f9da6fcb77e8bd09693635553d3ef",
-                "reference": "60819541858f9da6fcb77e8bd09693635553d3ef",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/4b6493999acfa7792efa3cb252d90168e6f266b9",
+                "reference": "4b6493999acfa7792efa3cb252d90168e6f266b9",
                 "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
             },
             "type": "library",
             "autoload": {
@@ -42,7 +46,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2014-04-17 21:19:22"
+            "time": "2017-01-23 07:45:19"
         },
         {
             "name": "illuminate/container",
@@ -85,10 +89,10 @@
                     "name": "Taylor Otwell",
                     "email": "taylorotwell@gmail.com",
                     "homepage": "https://github.com/taylorotwell",
-                    "role": "Developer"
+                    "role": "Creator of Laravel"
                 }
             ],
-            "time": "2014-03-22 20:29:54"
+            "time": "2014-03-22T20:29:54+00:00"
         },
         {
             "name": "illuminate/database",
@@ -141,7 +145,7 @@
                     "name": "Taylor Otwell",
                     "email": "taylorotwell@gmail.com",
                     "homepage": "https://github.com/taylorotwell",
-                    "role": "Developer"
+                    "role": "Creator of Laravel"
                 }
             ],
             "keywords": [
@@ -150,7 +154,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2014-04-11 20:10:04"
+            "time": "2014-04-11T20:10:04+00:00"
         },
         {
             "name": "illuminate/events",
@@ -196,10 +200,10 @@
                     "name": "Taylor Otwell",
                     "email": "taylorotwell@gmail.com",
                     "homepage": "https://github.com/taylorotwell",
-                    "role": "Developer"
+                    "role": "Creator of Laravel"
                 }
             ],
-            "time": "2014-03-22 20:12:48"
+            "time": "2014-03-22T20:12:48+00:00"
         },
         {
             "name": "illuminate/support",
@@ -248,10 +252,10 @@
                     "name": "Taylor Otwell",
                     "email": "taylorotwell@gmail.com",
                     "homepage": "https://github.com/taylorotwell",
-                    "role": "Developer"
+                    "role": "Creator of Laravel"
                 }
             ],
-            "time": "2014-03-22 20:29:54"
+            "time": "2014-03-22T20:29:54+00:00"
         },
         {
             "name": "illuminate/validation",
@@ -300,22 +304,22 @@
                     "name": "Taylor Otwell",
                     "email": "taylorotwell@gmail.com",
                     "homepage": "https://github.com/taylorotwell",
-                    "role": "Developer"
+                    "role": "Creator of Laravel"
                 }
             ],
-            "time": "2014-04-12 18:37:54"
+            "time": "2014-04-12T18:37:54+00:00"
         },
         {
             "name": "laravelbook/ardent",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravelbook/ardent.git",
+                "url": "https://github.com/laravel-ardent/ardent.git",
                 "reference": "0a0238b8040abc1c71401ce27a8edf2619fa5bed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravelbook/ardent/zipball/0a0238b8040abc1c71401ce27a8edf2619fa5bed",
+                "url": "https://api.github.com/repos/laravel-ardent/ardent/zipball/0a0238b8040abc1c71401ce27a8edf2619fa5bed",
                 "reference": "0a0238b8040abc1c71401ce27a8edf2619fa5bed",
                 "shasum": ""
             },
@@ -408,7 +412,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2014-01-07 05:10:44"
+            "time": "2014-01-07T05:10:44+00:00"
         },
         {
             "name": "symfony/config",
@@ -416,12 +420,12 @@
             "target-dir": "Symfony/Component/Config",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Config.git",
+                "url": "https://github.com/symfony/config.git",
                 "reference": "56908ccfd21eba6a57fa52fa28f50f0803f2fdb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Config/zipball/56908ccfd21eba6a57fa52fa28f50f0803f2fdb2",
+                "url": "https://api.github.com/repos/symfony/config/zipball/56908ccfd21eba6a57fa52fa28f50f0803f2fdb2",
                 "reference": "56908ccfd21eba6a57fa52fa28f50f0803f2fdb2",
                 "shasum": ""
             },
@@ -458,7 +462,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-18 20:40:13"
+            "time": "2014-04-18T20:40:13+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -466,12 +470,12 @@
             "target-dir": "Symfony/Component/Filesystem",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Filesystem.git",
+                "url": "https://github.com/symfony/filesystem.git",
                 "reference": "b717952487176a993e9b12a08b87beae25ae419c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/b717952487176a993e9b12a08b87beae25ae419c",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/b717952487176a993e9b12a08b87beae25ae419c",
                 "reference": "b717952487176a993e9b12a08b87beae25ae419c",
                 "shasum": ""
             },
@@ -495,19 +499,17 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
                     "name": "Symfony Community",
                     "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
-            "time": "2014-03-26 11:55:03"
+            "time": "2014-03-26T11:55:03+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -515,12 +517,12 @@
             "target-dir": "Symfony/Component/HttpFoundation",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/HttpFoundation.git",
+                "url": "https://github.com/symfony/http-foundation.git",
                 "reference": "11ad7352c7bfa12145a0df8e1c4c303c585ce169"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/11ad7352c7bfa12145a0df8e1c4c303c585ce169",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/11ad7352c7bfa12145a0df8e1c4c303c585ce169",
                 "reference": "11ad7352c7bfa12145a0df8e1c4c303c585ce169",
                 "shasum": ""
             },
@@ -550,19 +552,17 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
                     "name": "Symfony Community",
                     "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2014-03-26 11:35:33"
+            "time": "2014-03-26T11:35:33+00:00"
         },
         {
             "name": "symfony/translation",
@@ -619,7 +619,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
-            "time": "2014-03-26 11:35:33"
+            "time": "2014-03-26T11:35:33+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -628,12 +628,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "65539ecde838f9c0d18b006b2101e3deb4b5c9ff"
+                "reference": "297fd84aa9377e54268e9ff74cb81377350e230f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/65539ecde838f9c0d18b006b2101e3deb4b5c9ff",
-                "reference": "65539ecde838f9c0d18b006b2101e3deb4b5c9ff",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/297fd84aa9377e54268e9ff74cb81377350e230f",
+                "reference": "297fd84aa9377e54268e9ff74cb81377350e230f",
                 "shasum": ""
             },
             "require": {
@@ -656,31 +656,29 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
                     "name": "Symfony Community",
                     "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-18 20:37:09"
+            "time": "2014-09-22 08:51:05"
         },
         {
             "name": "twig/twig",
             "version": "v1.15.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabpot/Twig.git",
+                "url": "https://github.com/twigphp/Twig.git",
                 "reference": "1fb5784662f438d7d96a541e305e28b812e2eeed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/1fb5784662f438d7d96a541e305e28b812e2eeed",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1fb5784662f438d7d96a541e305e28b812e2eeed",
                 "reference": "1fb5784662f438d7d96a541e305e28b812e2eeed",
                 "shasum": ""
             },
@@ -725,15 +723,11 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-02-13 10:19:29"
+            "time": "2014-02-13T10:19:29+00:00"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "erusev/parsedown": 20,
@@ -741,10 +735,8 @@
         "symfony/config": 20,
         "laravelbook/ardent": 20
     },
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
 }
